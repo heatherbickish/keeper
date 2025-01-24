@@ -28,4 +28,19 @@ public class VaultsService
 
     return vault;
   }
+
+  internal Vault UpdateVault(int vaultId, string userId, Vault vaultData)
+  {
+    Vault vault = GetVaultById(vaultId);
+
+    if (vault.CreatorId != userId) throw new Exception("YOU CANNOT ALTER ANOTHER USERS VAULT, MY LOVE");
+
+    vault.Name = vaultData.Name ?? vault.Name;
+    vault.Description = vaultData.Description ?? vault.Description;
+    vault.Img = vaultData.Img ?? vault.Img;
+    vault.IsPrivate = vaultData.IsPrivate ?? vault.IsPrivate;
+
+    _vaultsRepository.UpdateVault(vault);
+    return vault;
+  }
 }

@@ -4,6 +4,7 @@
 
 
 
+
 namespace keeper.Repositories;
 
 public class VaultsRepository
@@ -53,5 +54,21 @@ public class VaultsRepository
       return vault;
     }, new { vaultId }).SingleOrDefault();
     return vault;
+  }
+
+  internal void UpdateVault(Vault vaultData)
+  {
+    string sql = @"
+      UPDATE vaults
+      SET
+      name = @Name,
+      description = @Description,
+      img = @Img,
+      is_private = @IsPrivate
+      WHERE id = @Id LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, vaultData);
+
+    if (rowsAffected != 1) throw new Exception($"{rowsAffected} WERE UPDATED AND THATS A SHAME");
   }
 }
