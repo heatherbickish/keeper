@@ -84,4 +84,13 @@ public class KeepsRepository
 
     if (rowsAffected != 1) throw new Exception($"{rowsAffected} WERE UPDATED AND THAT WAS TERRIBLE");
   }
+
+  internal void DeleteKeep(int keepId)
+  {
+    string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { keepId });
+
+    if (rowsAffected != 1) throw new Exception($"{rowsAffected} WERE DELETED AND THAT WAS NOT GOOD");
+  }
 }

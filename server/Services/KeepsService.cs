@@ -44,4 +44,14 @@ public class KeepsService
     _keepsRepository.UpdateKeep(keep);
     return keep;
   }
+
+  internal string DeleteKeep(int keepId, string userId)
+  {
+    Keep keep = GetKeepById(keepId);
+
+    if (keep.CreatorId != userId) throw new Exception("YOU CANNOT DELETE ANOTHER USERS KEEP, HOMIE");
+
+    _keepsRepository.DeleteKeep(keepId);
+    return $"Deleted {keep.Name}";
+  }
 }
