@@ -2,7 +2,6 @@
 
 
 namespace keeper.Services;
-
 public class KeepsService
 {
   public KeepsService(KeepsRepository keepsRepository)
