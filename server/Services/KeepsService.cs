@@ -30,4 +30,18 @@ public class KeepsService
     if (keep == null) throw new Exception($"Invalid keep id: {keepId}");
     return keep;
   }
+
+  internal Keep UpdateKeep(int keepId, string userId, Keep keepData)
+  {
+    Keep keep = GetKeepById(keepId);
+
+    if (keep.CreatorId != userId) throw new Exception("YOU CANNOT EDIT ANOTHER USERS KEEP, BUDDDY");
+
+    keep.Name = keepData.Name ?? keep.Name;
+    keep.Description = keepData.Description ?? keep.Description;
+    keep.Img = keepData.Img ?? keep.Img;
+
+    _keepsRepository.UpdateKeep(keep);
+    return keep;
+  }
 }

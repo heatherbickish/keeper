@@ -1,6 +1,7 @@
 
 
 
+
 namespace keeper.Repositories;
 
 public class KeepsRepository
@@ -67,5 +68,20 @@ public class KeepsRepository
       return keep;
     }, new { keepId }).SingleOrDefault();
     return keep;
+  }
+
+  internal void UpdateKeep(Keep keepData)
+  {
+    string sql = @"
+      UPDATE keeps
+      SET
+      name = @Name,
+      description = @Description,
+      img = @Img
+      WHERE id = @Id LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, keepData);
+
+    if (rowsAffected != 1) throw new Exception($"{rowsAffected} WERE UPDATED AND THAT WAS TERRIBLE");
   }
 }
