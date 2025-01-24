@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 namespace keeper.Controllers;
-
 [ApiController]
 [Route("api/[controller]")]
 public class VaultsController : ControllerBase

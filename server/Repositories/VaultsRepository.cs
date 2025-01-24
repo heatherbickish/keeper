@@ -6,7 +6,6 @@
 
 
 namespace keeper.Repositories;
-
 public class VaultsRepository
 {
   public VaultsRepository(IDbConnection db)

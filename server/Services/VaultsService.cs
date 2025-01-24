@@ -4,7 +4,6 @@
 
 
 namespace keeper.Services;
-
 public class VaultsService
 {
   public VaultsService(VaultsRepository vaultsRepository)
