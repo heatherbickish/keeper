@@ -48,3 +48,11 @@ CREATE TABLE vault_keeps(
   FOREIGN KEY (vault_id) REFERENCES vaults(id) ON DELETE CASCADE,
   FOREIGN KEY (creator_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
+
+
+  SELECT
+      vault_keeps.*,
+      keeps.*
+      FROM vault_keeps
+      JOIN keeps ON vault_keeps.keep_id = keeps.id
+      WHERE vault_keeps.vault_id = 10;
