@@ -80,7 +80,7 @@ public class KeepsController : ControllerBase
 
   [Authorize]
   [HttpDelete("{keepId}")]
-  public async Task<ActionResult<Keep>> DeleteKeep(int keepId)
+  public async Task<ActionResult<string>> DeleteKeep(int keepId)
   {
     try
     {

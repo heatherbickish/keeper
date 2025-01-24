@@ -71,4 +71,13 @@ public class VaultsRepository
 
     if (rowsAffected != 1) throw new Exception($"{rowsAffected} WERE UPDATED AND THATS A SHAME");
   }
+
+  internal void DeleteVault(int vaultId)
+  {
+    string sql = "DELETE FROM vaults WHERE id = @vaultId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { vaultId });
+
+    if (rowsAffected != 1) throw new Exception($"{rowsAffected} WERE DELETED AND YOU ARE IN TROUBLE");
+  }
 }
