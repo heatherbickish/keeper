@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 namespace keeper.Repositories;
 public class VaultsRepository
 {
@@ -78,5 +72,23 @@ public class VaultsRepository
     int rowsAffected = _db.Execute(sql, new { vaultId });
 
     if (rowsAffected != 1) throw new Exception($"{rowsAffected} WERE DELETED AND YOU ARE IN TROUBLE");
+  }
+
+  internal List<Vault> GetVaultsByProfileId(string profileId)
+  {
+    string sql = @"
+      SELECT
+      vaults.*,
+      accounts.*
+      FROM vaults
+      JOIN accounts ON accounts.id = vaults.creator_id
+      WHERE vaults.creator_id = @profileId;";
+
+    List<Vault> vaults = _db.Query(sql, (Vault vault, Profile account) =>
+    {
+      vault.Creator = account;
+      return vault;
+    }, new { profileId }).ToList();
+    return vaults;
   }
 }

@@ -3,14 +3,17 @@
 
 
 
+
 namespace keeper.Services;
 public class VaultsService
 {
-  public VaultsService(VaultsRepository vaultsRepository)
+  public VaultsService(VaultsRepository vaultsRepository, ProfilesService profilesService)
   {
     _vaultsRepository = vaultsRepository;
+    _profilesService = profilesService;
   }
   private readonly VaultsRepository _vaultsRepository;
+  private readonly ProfilesService _profilesService;
 
 
   internal Vault CreateVault(Vault vaultData)
@@ -51,5 +54,13 @@ public class VaultsService
 
     _vaultsRepository.DeleteVault(vaultId);
     return $"Deleted {vault.Name}";
+  }
+
+  internal List<Vault> GetVaultsByProfileId(string profileId)
+  {
+    _profilesService.GetProfileById(profileId);
+
+    List<Vault> vaults = _vaultsRepository.GetVaultsByProfileId(profileId);
+    return vaults;
   }
 }
