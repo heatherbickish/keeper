@@ -23,6 +23,9 @@ import Login from './Login.vue';
           </div>
         </div>
       </router-link>
+      <div class="border border-1 mt-2">
+        <p>the keepr co.</p>
+      </div>
       <div class="mt-2">
         <Login />
       </div>
