@@ -45,6 +45,7 @@ async function getAllKeeps() {
     break-inside: avoid;
     display: inline-block;
     width: 100%;
+    height: auto;
   }
 }
 </style>

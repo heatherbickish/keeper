@@ -3,12 +3,25 @@ import { AppState } from "@/AppState";
 import { Keep } from "@/models/Keep";
 import { computed } from "vue";
 import KeepModal from "./KeepModal.vue";
+import Pop from "@/utils/Pop";
+import { logger } from "@/utils/Logger";
+import { keepsService } from "@/services/KeepsService";
 
 defineProps({
   keep: { type: Keep, required: true }
 })
 
 const account = computed(() => AppState.account)
+
+async function getKeepById(keepId) {
+  try {
+    await keepsService.getKeepById(keepId)
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
 </script>
 
 
@@ -20,7 +33,10 @@ const account = computed(() => AppState.account)
       </button>
     </div>
     <div class="keep-info d-flex justify-content-between align-items-center p-3">
-      <h4 data-bs-toggle="modal" data-bs-target="#keepModal" role="button">{{ keep.name }}</h4>
+      <h4 @click="getKeepById(keep.id)" data-bs-toggle="modal" data-bs-target="#keepModal" role="button"
+        :title="'See details of ' + keep.name">
+        {{ keep.name }}
+      </h4>
       <router-link :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
         <img :src="keep.creator.picture" :alt="'A picture of' + keep.creator.name" class="creator-img">
       </router-link>
@@ -32,8 +48,6 @@ const account = computed(() => AppState.account)
 
 <style lang="scss" scoped>
 .picture-img {
-  height: auto;
-  width: 100%;
   border-radius: 12px;
   background-size: cover;
   background-position: center;
