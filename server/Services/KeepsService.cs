@@ -1,13 +1,16 @@
 namespace keeper.Services;
 public class KeepsService
 {
-  public KeepsService(KeepsRepository keepsRepository, VaultsService vaultsService)
+  public KeepsService(KeepsRepository keepsRepository, VaultsService vaultsService, ProfilesService profilesService)
   {
     _keepsRepository = keepsRepository;
     _vaultsService = vaultsService;
+    _profilesService = profilesService;
   }
   private readonly KeepsRepository _keepsRepository;
   private readonly VaultsService _vaultsService;
+  private readonly ProfilesService _profilesService;
+
 
   internal Keep CreateKeep(Keep keepData)
   {
@@ -57,6 +60,14 @@ public class KeepsService
     _vaultsService.GetVaultById(vaultId);
 
     List<KeptKeep> keeps = _keepsRepository.GetKeepsByVaultId(vaultId);
+    return keeps;
+  }
+
+  internal List<Keep> GetKeepsByProfileId(string profileId)
+  {
+    _profilesService.GetProfileById(profileId);
+
+    List<Keep> keeps = _keepsRepository.GetKeepsByProfileId(profileId);
     return keeps;
   }
 }
