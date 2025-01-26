@@ -33,10 +33,10 @@ async function getKeepById(keepId) {
       </button>
     </div>
     <div class="keep-info d-flex justify-content-between align-items-center p-3">
-      <h4 @click="getKeepById(keep.id)" data-bs-toggle="modal" data-bs-target="#keepModal" role="button"
+      <h5 @click="getKeepById(keep.id)" data-bs-toggle="modal" data-bs-target="#keepModal" role="button"
         :title="'See details of ' + keep.name">
         {{ keep.name }}
-      </h4>
+      </h5>
       <router-link :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
         <img :src="keep.creator.picture" :alt="'A picture of' + keep.creator.name" class="creator-img">
       </router-link>
@@ -69,8 +69,8 @@ async function getKeepById(keepId) {
   right: 0;
 }
 
-h4 {
-  text-shadow: 1.3px 1.4px rgb(61, 59, 59);
+h5 {
+  text-shadow: 1px 1.2px rgb(61, 59, 59);
   font-weight: 600;
   color: rgb(238, 233, 233);
 }

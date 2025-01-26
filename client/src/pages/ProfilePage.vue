@@ -19,7 +19,7 @@ const vaults = computed(() => AppState.vaults)
 onMounted(() => {
   GetProfileById()
   GetVaultsByProfileId()
-  GetAllKeeps()
+  GetKeepsByProfileId()
 })
 
 async function GetProfileById() {
@@ -45,9 +45,11 @@ async function GetVaultsByProfileId() {
   }
 }
 
-async function GetAllKeeps() {
+async function GetKeepsByProfileId() {
   try {
-    await keepsService.getAllKeeps()
+    const profileId = route.params.profileId
+    await keepsService.GetKeepsByProfileId(profileId)
+
   }
   catch (error) {
     Pop.meow(error);
@@ -70,15 +72,17 @@ async function GetAllKeeps() {
             </div>
             <div class="text-center">
               <h1>{{ profile.name }}</h1>
-              <p>2 Vaults | 68 Keeps</p>
+              <p>0 Vaults | 0 Keeps</p>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- SECTION vaults -->
       <div class="row justify-content-around">
         <div class="col-md-9">
           <div class="mt-3">
-            <h3 class="mb-3">Vaults</h3>
+            <h2 class="mb-3 fw-bold">Vaults</h2>
           </div>
           <div class="row justify-content-center">
             <div v-for="vault in vaults" :key="vault.id" class="col-md-3">
@@ -86,9 +90,11 @@ async function GetAllKeeps() {
             </div>
           </div>
         </div>
+
+        <!-- SECTION keeps -->
         <div class="col-md-9">
-          <div>
-            <h4>Keeps</h4>
+          <div class="mt-3">
+            <h2 class="mb-3 fw-bold">Keeps</h2>
           </div>
           <div class="masonry-container">
             <div v-for="keep in keeps" :key="keep.id" class="mb-3">
