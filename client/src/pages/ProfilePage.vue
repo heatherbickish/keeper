@@ -1,6 +1,8 @@
 <script setup>
 import { AppState } from "@/AppState";
+import KeepCard from "@/components/KeepCard.vue";
 import VaultCard from "@/components/VaultCard.vue";
+import { keepsService } from "@/services/KeepsService";
 import { profilesService } from "@/services/ProfilesService";
 import { vaultsService } from "@/services/VaultsService";
 import { logger } from "@/utils/Logger";
@@ -17,6 +19,7 @@ const vaults = computed(() => AppState.vaults)
 onMounted(() => {
   GetProfileById()
   GetVaultsByProfileId()
+  GetAllKeeps()
 })
 
 async function GetProfileById() {
@@ -42,6 +45,15 @@ async function GetVaultsByProfileId() {
   }
 }
 
+async function GetAllKeeps() {
+  try {
+    await keepsService.getAllKeeps()
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
 
 </script>
 
@@ -68,7 +80,7 @@ async function GetVaultsByProfileId() {
           <div class="mt-3">
             <h3 class="mb-3">Vaults</h3>
           </div>
-          <div class="row justify-content-around">
+          <div class="row justify-content-center">
             <div v-for="vault in vaults" :key="vault.id" class="col-md-3">
               <VaultCard :vault="vault" />
             </div>
@@ -77,6 +89,11 @@ async function GetVaultsByProfileId() {
         <div class="col-md-9">
           <div>
             <h4>Keeps</h4>
+          </div>
+          <div class="masonry-container">
+            <div v-for="keep in keeps" :key="keep.id" class="mb-3">
+              <KeepCard :keep="keep" />
+            </div>
           </div>
         </div>
       </div>
@@ -100,6 +117,18 @@ async function GetVaultsByProfileId() {
   border-radius: 50%;
   aspect-ratio: 1/1;
   border: 1px solid rgb(100, 97, 97);
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2), 5px 6px 4px rgba(0, 0, 0, 0.16);
+}
+
+.masonry-container {
+  columns: 200px;
+
+  >* {
+    break-inside: avoid;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+  }
 }
 
 @media screen and (min-width: 768px) {

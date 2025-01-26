@@ -34,8 +34,8 @@ defineProps({
 
 h5,
 i {
-  text-shadow: 1.3px 1.4px rgb(43, 41, 41);
-  font-weight: 350;
+  text-shadow: 1px 1px rgb(43, 41, 41);
+  font-weight: 400;
   color: rgb(250, 240, 240);
 }
 
