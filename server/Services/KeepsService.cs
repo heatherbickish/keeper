@@ -24,10 +24,23 @@ public class KeepsService
     return keeps;
   }
 
-  internal Keep GetKeepById(int keepId)
+  private Keep GetKeepById(int keepId)
   {
     Keep keep = _keepsRepository.GetKeepById(keepId);
+
     if (keep == null) throw new Exception($"Invalid keep id: {keepId}");
+    return keep;
+  }
+
+  internal Keep IncrementViews(int keepId, string userId)
+  {
+    Keep keep = GetKeepById(keepId);
+
+    if (keep.CreatorId != userId)
+    {
+      keep.Views++;
+    }
+    _keepsRepository.IncrementViews(keep);
     return keep;
   }
 
@@ -57,7 +70,7 @@ public class KeepsService
 
   internal List<KeptKeep> GetKeepsByVaultId(int vaultId, string userId)
   {
-    _vaultsService.GetVaultById(vaultId);
+    _vaultsService.GetVaultById(vaultId, userId);
 
     List<KeptKeep> keeps = _keepsRepository.GetKeepsByVaultId(vaultId);
     return keeps;

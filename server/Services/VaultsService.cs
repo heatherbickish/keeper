@@ -22,7 +22,7 @@ public class VaultsService
     return vault;
   }
 
-  internal Vault GetVaultById(int vaultId)
+  private Vault GetVaultById(int vaultId)
   {
     Vault vault = _vaultsRepository.GetVaultById(vaultId);
 
@@ -31,14 +31,14 @@ public class VaultsService
     return vault;
   }
 
-  // internal Vault GetVaultById(int vaultId, string userId)
-  // {
-  //   Vault vault = _vaultsRepository.GetVaultById(vaultId);
+  internal Vault GetVaultById(int vaultId, string userId)
+  {
+    Vault vault = GetVaultById(vaultId);
 
-  //   if (vault.CreatorId != userId && vault.IsPrivate == true) throw new Exception($"Invalid vault id: {vaultId} 😜");
+    if (vault.CreatorId != userId && vault.IsPrivate == true) throw new Exception($"Invalid vault id: {vaultId} 😜");
 
-  //   return vault;
-  // }
+    return vault;
+  }
 
   internal Vault UpdateVault(int vaultId, string userId, Vault vaultData)
   {
@@ -78,4 +78,6 @@ public class VaultsService
     List<Vault> vaults = _vaultsRepository.GetMyVaults(userId);
     return vaults;
   }
+
+
 }
