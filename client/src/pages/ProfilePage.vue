@@ -57,7 +57,7 @@ async function GetVaultsByProfileId() {
               <img :src="profile.picture" :alt="'A picture of ' + profile.name" class="creator-img  creator-sticky">
             </div>
             <div class="text-center">
-              <h2>{{ profile.name }}</h2>
+              <h1>{{ profile.name }}</h1>
               <p>2 Vaults | 68 Keeps</p>
             </div>
           </div>
@@ -66,13 +66,11 @@ async function GetVaultsByProfileId() {
       <div class="row justify-content-around">
         <div class="col-md-9">
           <div class="mt-3">
-            <h4>Vaults</h4>
+            <h3 class="mb-3">Vaults</h3>
           </div>
           <div class="row justify-content-around">
             <div v-for="vault in vaults" :key="vault.id" class="col-md-3">
-              <div class="text-center">
-                <VaultCard />
-              </div>
+              <VaultCard :vault="vault" />
             </div>
           </div>
         </div>
