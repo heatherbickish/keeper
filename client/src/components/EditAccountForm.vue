@@ -33,14 +33,17 @@ async function updateAccount() {
 <template>
   <form @submit.prevent="updateAccount()">
     <div class="mb-3">
+      <label for="name" class="form-label">Your name</label>
       <input v-model="editableAccountData.name" type="name" class="form-control" id="name" placeholder="Your name..."
         maxlength="255" required>
     </div>
     <div class="mb-3">
+      <label for="picture" class="form-label">Picture Url</label>
       <input v-model="editableAccountData.picture" type="url" class="form-control" id="picture"
         placeholder="Picture Url..." max="255" required>
     </div>
     <div class="mb-3">
+      <label for="coverImg" class="form-label">Cover Image Url</label>
       <input v-model="editableAccountData.coverImg" type="name" class="form-control" id="coverImg"
         placeholder="Cover Image Url..." max="1000" required>
     </div>

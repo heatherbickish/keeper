@@ -59,6 +59,7 @@ async function getKeepById(keepId) {
 .creator-img {
   height: 2.5rem;
   border-radius: 50%;
+  aspect-ratio: 1/1;
   border: 1px solid rgb(100, 97, 97);
 }
 

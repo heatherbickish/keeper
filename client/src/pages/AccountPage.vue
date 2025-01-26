@@ -81,7 +81,7 @@ const account = computed(() => AppState.account)
 }
 
 .account-img {
-  height: 6rem;
+  height: 7rem;
   border-radius: 50%;
   aspect-ratio: 1/1;
   object-fit: cover;
@@ -104,7 +104,7 @@ const account = computed(() => AppState.account)
 @media screen and (min-width: 768px) {
   .account-sticky {
     position: relative;
-    bottom: 6em;
+    bottom: 7em;
   }
 }
 </style>

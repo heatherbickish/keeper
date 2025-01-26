@@ -119,7 +119,7 @@ async function GetKeepsByProfileId() {
 }
 
 .creator-img {
-  height: 6rem;
+  height: 7rem;
   border-radius: 50%;
   aspect-ratio: 1/1;
   border: 1px solid rgb(100, 97, 97);
@@ -140,7 +140,7 @@ async function GetKeepsByProfileId() {
 @media screen and (min-width: 768px) {
   .creator-sticky {
     position: relative;
-    bottom: 3em;
+    bottom: 4em;
   }
 }
 </style>
