@@ -1,26 +1,95 @@
 <script setup>
 import { computed } from 'vue';
 import { AppState } from '../AppState.js';
+import VaultCard from "@/components/VaultCard.vue";
+import KeepCard from "@/components/KeepCard.vue";
 
 const account = computed(() => AppState.account)
 
 </script>
 
 <template>
-  <div class="about text-center">
-    <div v-if="account">
-      <h1>Welcome {{ account.name }}</h1>
-      <img class="rounded" :src="account.picture" alt="" />
-      <p>{{ account.email }}</p>
-    </div>
-    <div v-else>
-      <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
-    </div>
+  <div v-if="account">
+    <section class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="mt-5">
+            <img :src="account.coverImg" :alt="'A cover image by ' + account.name" class="cover-img">
+            <div class="text-center">
+              <img :src="account.picture" :alt="'A picture of ' + account.name" class="account-img account-sticky">
+            </div>
+            <div class="text-center">
+              <h1 class="mb-3 fw-bold">{{ account.name }}</h1>
+              <p>0 Vaults | 0 Keeps</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION vaults -->
+      <div class="row justify-content-around">
+        <div class="col-md-9">
+          <div class="mt-3">
+            <h2 class="mb-3 fw-bold">Vaults</h2>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-3">
+              <!-- <VaultCard :vault="vault"/> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION keeps -->
+        <div class="col-md-9">
+          <div class="mt-3">
+            <h2 class="mb-3 fw-bold">Keeps</h2>
+          </div>
+          <div class="masonry-container">
+            <div class="mb-3">
+              <!-- <KeepCard :keep="keep"/> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div v-else>
+    <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
   </div>
 </template>
 
 <style scoped lang="scss">
-img {
-  max-width: 100px;
+.cover-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 9px;
+}
+
+.account-img {
+  height: 6rem;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  border: 1px solid rgb(100, 97, 97);
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2), 5px 6px 4px rgba(0, 0, 0, 0.16);
+}
+
+.masonry-container {
+  columns: 200px;
+
+  >* {
+    break-inside: avoid;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .account-sticky {
+    position: relative;
+    bottom: 3em;
+  }
 }
 </style>
