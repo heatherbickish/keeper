@@ -16,9 +16,11 @@ import Login from './Login.vue';
               Create
             </button>
             <ul class="dropdown-menu">
-              <li class="dropdown-item fs-5">new keep</li>
+              <li role="button" class="dropdown-item fs-5" data-bs-toggle="modal" data-bs-target="#newKeepModal">new
+                keep</li>
               <hr>
-              <li class="dropdown-item fs-5">new vault</li>
+              <li role="button" class="dropdown-item fs-5" data-bs-toggle="modal" data-bs-target="#newVaultModal">new
+                vault</li>
             </ul>
           </div>
         </div>
