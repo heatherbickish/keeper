@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import { AppState } from '../AppState.js';
 import VaultCard from "@/components/VaultCard.vue";
 import KeepCard from "@/components/KeepCard.vue";
+import EditAccountModal from "@/components/EditAccountModal.vue";
 
 const account = computed(() => AppState.account)
 
@@ -15,6 +16,15 @@ const account = computed(() => AppState.account)
         <div class="col-md-8">
           <div class="mt-5">
             <img :src="account.coverImg" :alt="'A cover image by ' + account.name" class="cover-img">
+            <div class="text-end dropdown">
+              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="mdi mdi-dots-horizontal fs-4"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li role="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editAccountModal">edit
+                  account</li>
+              </ul>
+            </div>
             <div class="text-center">
               <img :src="account.picture" :alt="'A picture of ' + account.name" class="account-img account-sticky">
             </div>
@@ -24,6 +34,7 @@ const account = computed(() => AppState.account)
             </div>
           </div>
         </div>
+        <EditAccountModal />
       </div>
 
       <!-- SECTION vaults -->
@@ -89,7 +100,7 @@ const account = computed(() => AppState.account)
 @media screen and (min-width: 768px) {
   .account-sticky {
     position: relative;
-    bottom: 3em;
+    bottom: 6em;
   }
 }
 </style>
