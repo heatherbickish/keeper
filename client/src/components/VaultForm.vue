@@ -1,29 +1,50 @@
 <script setup>
 import { AppState } from "@/AppState";
+import { vaultsService } from "@/services/VaultsService";
+import { logger } from "@/utils/Logger";
+import Pop from "@/utils/Pop";
 import { computed, ref } from "vue";
 
 
 const editableVaultData = ref({
   name: '',
   img: '',
+  description: '',
   isPrivate: false
 })
+
+async function createVault() {
+  try {
+    await vaultsService.createVault(editableVaultData.value)
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
 
 </script>
 
 
 <template>
-  <form>
+  <form @submit.prevent="createVault()">
     <div class="mb-3">
-      <input type="text" class="form-control" id="name" placeholder="Title..." maxlength="255" required>
+      <input v-model="editableVaultData.name" type="text" class="form-control" id="name" placeholder="Title..."
+        maxlength="255" required>
     </div>
     <div class="mb-3">
-      <input type="url" class="form-control" id="img" placeholder="URL..." max="1000" required>
+      <input v-model="editableVaultData.img" type="url" class="form-control" id="img" placeholder="URL..." max="1000"
+        required>
+    </div>
+    <div class="mb-3">
+      <textarea v-model="editableVaultData.description" class="form-control" id="description" rows="3"
+        placeholder="Keep Description..." maxlength="1000" required></textarea>
     </div>
     <div id="vaultIsPrivateHelp" class="form-text text-end">Private vaults can only be seen by you</div>
     <div class="form-check d-flex justify-content-end align-items-center mb-4 gap-1">
-      <input class="form-check-input" type="checkbox" value="" id="isPrivate" required>
-      <label class="form-check-label" for="flexCheckDefault">
+      <input v-model="editableVaultData.isPrivate" class="form-check-input" type="checkbox" value="" id="isPrivate"
+        required>
+      <label class="form-check-label" for="isPrivate">
         Make Vault Private?
       </label>
     </div>

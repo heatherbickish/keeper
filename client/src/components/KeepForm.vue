@@ -38,7 +38,7 @@ async function createKeep() {
       <input v-model="editableKeepData.name" type="text" class="form-control" id="name" placeholder="Title..."
         maxlength="255" required>
     </div>
-    <div class="mb-4">
+    <div class="mb-3">
       <input v-model="editableKeepData.img" type="url" class="form-control" id="img" placeholder="Image Url..."
         max="1000" required>
     </div>

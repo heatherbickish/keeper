@@ -5,6 +5,7 @@ import { computed } from "vue";
 
 
 const keep = computed(() => AppState.activeKeep)
+const vaults = computed(() => AppState.vaults.filter(vault => vault.creatorId != AppState.account?.id))
 
 </script>
 
@@ -30,8 +31,17 @@ const keep = computed(() => AppState.activeKeep)
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
 
-                  <!-- TODO vault select -->
-                  <h5>Plants</h5>
+                  <!-- TODO create vaultkeep -->
+                  <!-- <form>
+                    <div>
+                      <select class="form-select" aria-label="Select a vault" required>
+                        <option value="" disabled>Choose a vault</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    </div>
+                  </form> -->
                   <router-link :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
                     <img :src="keep.creator.picture" :alt="'A picture of ' + keep.creator.name" class="creator-img"
                       data-bs-dismiss="modal">
