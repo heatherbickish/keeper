@@ -24,7 +24,7 @@ const vaults = computed(() => AppState.vaults.filter(vault => vault.creatorId !=
               <img :src="keep.img" :alt="'A picture by ' + keep.creator" class="keep-img">
               <div class="text-center p-4 mb-5">
                 <i class="mdi mdi-eye fs-5">{{ keep.views }}</i>
-                <i class="mdi mdi-alpha-k-box-outline fs-5 ms-3"> {{ keep.kept }}0</i>
+                <i class="mdi mdi-alpha-k-box-outline fs-5 ms-3"> {{ keep.kept }}</i>
                 <div class="p-3 mt-5">
                   <h2 class="text-center">{{ keep.name }}</h2>
                   <p>{{ keep.description }}</p>

@@ -1,14 +1,29 @@
 <script setup>
 import { AppState } from "@/AppState";
 import { Vault } from "@/models/Vault";
+import { vaultsService } from "@/services/VaultsService";
+import { logger } from "@/utils/Logger";
+import Pop from "@/utils/Pop";
 import { computed } from "vue";
 
 
-defineProps({
+const props = defineProps({
   vault: { type: Vault, required: true }
 })
 
 const account = computed(() => AppState.account)
+
+async function deleteVault(vaultId) {
+  try {
+    const yes = await Pop.confirm(`Are you sure you want to delete the ${props.vault.name} vault?`)
+    if (!yes) return
+    await vaultsService.deleteVault(vaultId)
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
 
 </script>
 
@@ -17,7 +32,8 @@ const account = computed(() => AppState.account)
   <div>
     <div :style="{ backgroundImage: `url(${vault.img})` }" class="vault-card mb-3">
       <div v-if="vault.creatorId == account?.id" class="text-end">
-        <button class="btn" type="button" title="Delete Vault"><i class="mdi mdi-close-circle text-danger"></i></button>
+        <button @click="deleteVault(vault.id)" class="btn" type="button" title="Delete Vault"><i
+            class="mdi mdi-close-circle text-danger"></i></button>
       </div>
       <router-link :to="{ name: 'Vault', params: { vaultId: vault.id } }">
         <div class="vault-info d-flex justify-content-between align-items-center p-2">

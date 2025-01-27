@@ -43,6 +43,7 @@ const account = computed(() => AppState.account)
 h5 {
   background-color: #c3c8db;
   text-decoration: none;
+  color: rgb(17, 17, 17)
 }
 
 nav {

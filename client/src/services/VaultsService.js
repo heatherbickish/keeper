@@ -1,9 +1,13 @@
 import { api } from "./AxiosService.js"
 import { Vault } from "@/models/Vault.js"
 import { AppState } from "@/AppState.js"
-import { logger } from "@/utils/Logger.js"
 
 class VaultsService {
+  async deleteVault(vaultId) {
+    const response = await api.delete(`api/vaults/${vaultId}`)
+    const vaultIndex = AppState.vaults.findIndex(vault => vault.id == vaultId)
+    AppState.vaults.splice(vaultIndex, 1)
+  }
   async createVault(vaultData) {
     const response = await api.post('api/vaults', vaultData)
     const createdVault = new Vault(response.data)
