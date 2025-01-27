@@ -4,6 +4,11 @@ import { AppState } from "@/AppState.js"
 import { logger } from "@/utils/Logger.js"
 
 class KeepsService {
+  async deleteKeep(keepId) {
+    const response = await api.delete(`api/keeps/${keepId}`)
+    const keepIndex = AppState.keeps.findIndex(keep => keep.id == keepId)
+    AppState.keeps.splice(keepIndex, 1)
+  }
   async createKeep(keepData) {
     const response = await api.post('api/keeps', keepData)
     const createdKeep = new Keep(response.data)

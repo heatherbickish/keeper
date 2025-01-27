@@ -2,6 +2,7 @@
 import { keepsService } from "@/services/KeepsService";
 import { logger } from "@/utils/Logger";
 import Pop from "@/utils/Pop";
+import { Modal } from "bootstrap";
 import { ref } from "vue";
 
 
@@ -19,6 +20,7 @@ async function createKeep() {
       img: '',
       description: ''
     }
+    Modal.getInstance('#newKeepModal').hide()
   }
   catch (error) {
     Pop.meow(error);

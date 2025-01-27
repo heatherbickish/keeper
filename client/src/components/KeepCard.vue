@@ -7,7 +7,7 @@ import Pop from "@/utils/Pop";
 import { logger } from "@/utils/Logger";
 import { keepsService } from "@/services/KeepsService";
 
-defineProps({
+const props = defineProps({
   keep: { type: Keep, required: true }
 })
 
@@ -22,13 +22,25 @@ async function getKeepById(keepId) {
     logger.error(error)
   }
 }
+
+async function deleteKeep(keepId) {
+  try {
+    const yes = await Pop.confirm(`Are you sure you want to delete the ${props.keep.name} keep?`)
+    if (!yes) return
+    await keepsService.deleteKeep(keepId)
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
 </script>
 
 
 <template>
   <div :style="{ backgroundImage: `url(${keep.img})` }" class="picture-img">
     <div v-if="keep.creatorId == account?.id" class="text-end">
-      <button class="btn btn-small" type="button" title="Delete Keep">
+      <button @click="deleteKeep(keep.id)" class="btn btn-small" type="button" title="Delete Keep">
         <i class="mdi mdi-close-circle text-danger"></i>
       </button>
     </div>

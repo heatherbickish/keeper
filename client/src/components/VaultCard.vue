@@ -15,7 +15,7 @@ defineProps({
       <div :style="{ backgroundImage: `url(${vault.img})` }" class="vault-card mb-3">
         <div class="vault-info d-flex justify-content-between align-items-center p-2">
           <h5 class="text-uppercase">{{ vault.name }}</h5>
-          <i class="mdi mdi-lock-check-outline fs-5"></i>
+          <i v-if="vault.isPrivate" class="mdi mdi-lock-check-outline fs-5"></i>
         </div>
       </div>
     </router-link>
