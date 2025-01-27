@@ -65,14 +65,6 @@ public class VaultsService
     return $"Deleted {vault.Name}";
   }
 
-  // private List<Vault> GetVaultsByProfileId(string profileId)
-  // {
-  //   _profilesService.GetProfileById(profileId);
-
-  //   List<Vault> vaults = _vaultsRepository.GetVaultsByProfileId(profileId);
-  //   return vaults;
-  // }
-
   internal List<Vault> GetVaultsByProfileId(string profileId)
   {
     _profilesService.GetProfileById(profileId);

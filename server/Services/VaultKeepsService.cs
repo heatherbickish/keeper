@@ -26,6 +26,7 @@ public class VaultKeepsService
     if (vault.CreatorId != vaultKeepData.CreatorId) throw new Exception("HAHA CAUGHT YOOUUU!");
 
     VaultKeep vaultKeep = _vaultKeepsRepository.CreateVaultKeep(vaultKeepData);
+
     return vaultKeep;
   }
 
