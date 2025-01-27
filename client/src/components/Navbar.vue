@@ -9,26 +9,26 @@ const account = computed(() => AppState.account)
 <template>
   <nav class="px-3">
     <div class="d-flex align-items-center justify-content-between">
-      <router-link :to="{ name: 'Home' }">
-        <div class="d-flex align-items-center mt-2 ms-4 text-dark">
+      <div class="d-flex align-items-center mt-2 ms-4 text-dark">
+        <router-link :to="{ name: 'Home' }">
           <h5 class="rounded px-2 py-1">Home</h5>
-          <div v-if="account" class="dropdown">
-            <button class="btn fs-5 mb-2 ms-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false" title="Dropdown menu">
-              Create
-            </button>
-            <ul class="dropdown-menu">
-              <li role="button" class="dropdown-item fs-5" data-bs-toggle="modal" data-bs-target="#newKeepModal"
-                title="Create New Keep">new
-                keep</li>
-              <hr>
-              <li role="button" class="dropdown-item fs-5" data-bs-toggle="modal" data-bs-target="#newVaultModal"
-                title="Create New Vault">new
-                vault</li>
-            </ul>
-          </div>
+        </router-link>
+        <div v-if="account" class="dropdown">
+          <button class="btn fs-5 mb-2 ms-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" title="Dropdown menu">
+            Create
+          </button>
+          <ul class="dropdown-menu">
+            <li role="button" class="dropdown-item fs-5" data-bs-toggle="modal" data-bs-target="#newKeepModal"
+              title="Create New Keep">new
+              keep</li>
+            <hr>
+            <li role="button" class="dropdown-item fs-5" data-bs-toggle="modal" data-bs-target="#newVaultModal"
+              title="Create New Vault">new
+              vault</li>
+          </ul>
         </div>
-      </router-link>
+      </div>
       <div class="border border-1 mt-2 pt-2">
         <p class="text-center">the keepr co.</p>
       </div>
@@ -42,6 +42,7 @@ const account = computed(() => AppState.account)
 <style scoped>
 h5 {
   background-color: #c3c8db;
+  text-decoration: none;
 }
 
 nav {

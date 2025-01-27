@@ -17,6 +17,7 @@ class KeepsService {
   async createKeep(keepData) {
     const response = await api.post('api/keeps', keepData)
     const createdKeep = new Keep(response.data)
+    if (keepData.creatorId != AppState.activeProfile.id) return
     AppState.keeps.unshift(createdKeep)
   }
   async GetKeepsByProfileId(profileId) {

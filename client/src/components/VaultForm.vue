@@ -4,7 +4,7 @@ import { vaultsService } from "@/services/VaultsService";
 import { logger } from "@/utils/Logger";
 import Pop from "@/utils/Pop";
 import { Modal } from "bootstrap";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 
 
 const editableVaultData = ref({
