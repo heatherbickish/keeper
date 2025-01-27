@@ -19,11 +19,13 @@ const account = computed(() => AppState.account)
           <div class="mt-5">
             <img :src="account.coverImg" :alt="'A cover image by ' + account.name" class="cover-img">
             <div class="text-end dropdown">
-              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                title="Dropdown menu">
                 <i class="mdi mdi-dots-horizontal fs-4"></i>
               </button>
               <ul class="dropdown-menu">
-                <li role="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editAccountModal">edit
+                <li role="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editAccountModal"
+                  title="Edit Account">edit
                   account</li>
               </ul>
             </div>

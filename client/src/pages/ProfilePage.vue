@@ -72,7 +72,7 @@ async function GetKeepsByProfileId() {
             </div>
             <div class="text-center">
               <h1>{{ profile.name }}</h1>
-              <p>0 Vaults | 0 Keeps</p>
+              <p>{{ vaults.length }} Vaults | {{ keeps.length }} Keeps</p>
             </div>
           </div>
         </div>

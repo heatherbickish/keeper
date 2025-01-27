@@ -1,7 +1,9 @@
 <script setup>
+import { computed } from "vue";
 import Login from './Login.vue';
+import { AppState } from "@/AppState";
 
-
+const account = computed(() => AppState.account)
 </script>
 
 <template>
@@ -10,23 +12,25 @@ import Login from './Login.vue';
       <router-link :to="{ name: 'Home' }">
         <div class="d-flex align-items-center mt-2 ms-4 text-dark">
           <h5 class="rounded px-2 py-1">Home</h5>
-          <div class="dropdown">
+          <div v-if="account" class="dropdown">
             <button class="btn fs-5 mb-2 ms-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
+              aria-expanded="false" title="Dropdown menu">
               Create
             </button>
             <ul class="dropdown-menu">
-              <li role="button" class="dropdown-item fs-5" data-bs-toggle="modal" data-bs-target="#newKeepModal">new
+              <li role="button" class="dropdown-item fs-5" data-bs-toggle="modal" data-bs-target="#newKeepModal"
+                title="Create New Keep">new
                 keep</li>
               <hr>
-              <li role="button" class="dropdown-item fs-5" data-bs-toggle="modal" data-bs-target="#newVaultModal">new
+              <li role="button" class="dropdown-item fs-5" data-bs-toggle="modal" data-bs-target="#newVaultModal"
+                title="Create New Vault">new
                 vault</li>
             </ul>
           </div>
         </div>
       </router-link>
-      <div class="border border-1 mt-2">
-        <p>the keepr co.</p>
+      <div class="border border-1 mt-2 pt-2">
+        <p class="text-center">the keepr co.</p>
       </div>
       <div class="mt-2">
         <Login />
