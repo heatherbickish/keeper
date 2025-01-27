@@ -17,7 +17,7 @@ public class AccountController : ControllerBase
 
 
   [HttpGet]
-  public async Task<ActionResult<Account>> Get()
+  public async Task<ActionResult<Profile>> Get()
   {
     try
     {
@@ -47,12 +47,12 @@ public class AccountController : ControllerBase
   }
 
   [HttpPut]
-  public async Task<ActionResult<Account>> EditAccount([FromBody] Account editData)
+  public async Task<ActionResult<Profile>> EditAccount([FromBody] Profile editData)
   {
     try
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      Account updatedProfile = _accountService.Edit(editData, userInfo.Id);
+      Profile updatedProfile = _accountService.Edit(editData, userInfo.Id);
       return Ok(updatedProfile);
 
     }

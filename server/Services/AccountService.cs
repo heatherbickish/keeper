@@ -9,9 +9,9 @@ public class AccountService
     _repo = repo;
   }
 
-  private Account GetAccount(string accountId)
+  private Profile GetAccount(string accountId)
   {
-    Account account = _repo.GetById(accountId);
+    Profile account = _repo.GetById(accountId);
     if (account == null)
     {
       throw new Exception("Invalid Account Id");
@@ -19,9 +19,9 @@ public class AccountService
     return account;
   }
 
-  internal Account GetOrCreateAccount(Account userInfo)
+  internal Profile GetOrCreateAccount(Account userInfo)
   {
-    Account account = _repo.GetById(userInfo.Id);
+    Profile account = _repo.GetById(userInfo.Id);
     if (account == null)
     {
       return _repo.Create(userInfo);
@@ -29,12 +29,12 @@ public class AccountService
     return account;
   }
 
-  internal Account Edit(Account editData, string accountId)
+  internal Profile Edit(Profile editData, string accountId)
   {
-    Account original = GetAccount(accountId);
-    original.Name = editData.Name ?? editData.Name;
-    original.Picture = editData.Picture ?? editData.Picture;
-    original.CoverImg = editData.CoverImg ?? editData.CoverImg;
-    return _repo.Edit(original);
+    Profile profile = GetAccount(accountId);
+    profile.Name = editData.Name ?? editData.Name;
+    profile.Picture = editData.Picture ?? editData.Picture;
+    profile.CoverImg = editData.CoverImg ?? editData.CoverImg;
+    return _repo.Edit(profile);
   }
 }

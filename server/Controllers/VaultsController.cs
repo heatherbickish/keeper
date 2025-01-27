@@ -90,7 +90,7 @@ public class VaultsController : ControllerBase
     try
     {
       Account userInfo = await _autho0Provider.GetUserInfoAsync<Account>(HttpContext);
-      List<KeptKeep> keeps = _keepsService.GetKeepsByVaultId(vaultId, userInfo.Id);
+      List<KeptKeep> keeps = _keepsService.GetKeepsByVaultId(vaultId, userInfo?.Id);
       return Ok(keeps);
     }
     catch (Exception exception)

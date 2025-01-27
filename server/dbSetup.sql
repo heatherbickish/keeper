@@ -21,6 +21,14 @@ CREATE TABLE keeps(
   FOREIGN KEY(creator_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
 
+CREATE VIEW keeps_with_kept_view AS
+SELECT
+keeps.*,
+COUNT(vault_keeps.id) AS kept
+FROM keeps
+LEFT JOIN vault_keeps ON keeps.id = vault_keeps.keep_id
+GROUP BY(keeps.id)
+
 DROP TABLE keeps;
 
 CREATE TABLE vaults(

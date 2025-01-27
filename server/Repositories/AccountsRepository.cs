@@ -15,10 +15,10 @@ public class AccountsRepository
     return _db.QueryFirstOrDefault<Account>(sql, new { userEmail });
   }
 
-  internal Account GetById(string id)
+  internal Profile GetById(string id)
   {
     string sql = "SELECT * FROM accounts WHERE id = @id";
-    return _db.QueryFirstOrDefault<Account>(sql, new { id });
+    return _db.QueryFirstOrDefault<Profile>(sql, new { id });
   }
 
   internal Account Create(Account newAccount)
@@ -32,7 +32,7 @@ public class AccountsRepository
     return newAccount;
   }
 
-  internal Account Edit(Account update)
+  internal Profile Edit(Profile update)
   {
     string sql = @"
             UPDATE accounts
