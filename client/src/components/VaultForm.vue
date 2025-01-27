@@ -1,4 +1,13 @@
 <script setup>
+import { AppState } from "@/AppState";
+import { computed, ref } from "vue";
+
+
+const editableVaultData = ref({
+  name: '',
+  img: '',
+  isPrivate: false
+})
 
 </script>
 

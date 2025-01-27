@@ -4,6 +4,10 @@ import { AppState } from "@/AppState.js"
 import { logger } from "@/utils/Logger.js"
 
 class KeepsService {
+  // async getMyKeeps(profileId) {
+  //   const response = await api.get(`api/${profileId}/keeps`)
+  //   logger.log(response.data)
+  // }
   async deleteKeep(keepId) {
     const response = await api.delete(`api/keeps/${keepId}`)
     const keepIndex = AppState.keeps.findIndex(keep => keep.id == keepId)

@@ -1,13 +1,45 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import VaultCard from "@/components/VaultCard.vue";
 import KeepCard from "@/components/KeepCard.vue";
 import EditAccountModal from "@/components/EditAccountModal.vue";
+import Pop from "@/utils/Pop.js";
+import { logger } from "@/utils/Logger.js";
+import { useRoute } from "vue-router";
+import { keepsService } from "@/services/KeepsService.js";
+import { vaultsService } from "@/services/VaultsService.js";
 
 const account = computed(() => AppState.account)
+const keeps = computed(() => AppState.keeps)
+const vautls = computed(() => AppState.vaults)
+const route = useRoute()
 
+onMounted(() => {
+  // getMyKeeps()
+  getMyVaults()
+})
 
+async function getMyVaults() {
+  try {
+    await vaultsService.getMyVaults()
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
+
+// async function getMyKeeps() {
+//   try {
+//     const profileId = route.params.profileId
+//     await keepsService.getMyKeeps(profileId)
+//   }
+//   catch (error) {
+//     Pop.meow(error);
+//     logger.error(error)
+//   }
+// }
 
 </script>
 
@@ -25,8 +57,7 @@ const account = computed(() => AppState.account)
               </button>
               <ul class="dropdown-menu">
                 <li role="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editAccountModal"
-                  title="Edit Account">edit
-                  account</li>
+                  title="Edit Account">edit account</li>
               </ul>
             </div>
             <div class="text-center">
@@ -34,7 +65,7 @@ const account = computed(() => AppState.account)
             </div>
             <div class="text-center">
               <h1 class="mb-3 fw-bold">{{ account.name }}</h1>
-              <p>0 Vaults | 0 Keeps</p>
+              <p>{{ vautls.length }} Vaults | {{ keeps.length }} Keeps</p>
             </div>
           </div>
         </div>

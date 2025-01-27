@@ -12,6 +12,8 @@ const props = defineProps({
 })
 
 const account = computed(() => AppState.account)
+const vaults = computed(() => AppState.vaults.filter(vault => vault.creatorId != AppState.account?.id))
+
 
 async function getKeepById(keepId) {
   try {
