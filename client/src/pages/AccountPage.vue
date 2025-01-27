@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { AppState } from '../AppState.js';
 import VaultCard from "@/components/VaultCard.vue";
 import KeepCard from "@/components/KeepCard.vue";
@@ -15,10 +15,11 @@ const keeps = computed(() => AppState.keeps)
 const vaults = computed(() => AppState.vaults)
 const route = useRoute()
 
-onMounted(() => {
-  // getMyKeeps()
+
+watch(account, () => {
+  getMyKeeps()
   getMyVaults()
-})
+}, { immediate: true })
 
 async function getMyVaults() {
   try {
@@ -30,16 +31,15 @@ async function getMyVaults() {
   }
 }
 
-// async function getMyKeeps() {
-//   try {
-//     const profileId = route.params.profileId
-//     await keepsService.getMyKeeps(profileId)
-//   }
-//   catch (error) {
-//     Pop.meow(error);
-//     logger.error(error)
-//   }
-// }
+async function getMyKeeps() {
+  try {
+    await keepsService.getMyKeeps(account.value.id)
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
 
 </script>
 
@@ -91,8 +91,8 @@ async function getMyVaults() {
             <h2 class="mb-3 fw-bold">Keeps</h2>
           </div>
           <div class="masonry-container">
-            <div class="mb-3">
-              <!-- <KeepCard :keep="keep"/> -->
+            <div v-for="keep in keeps" :key="keep.id" class="mb-3">
+              <KeepCard :keep="keep" />
             </div>
           </div>
         </div>
