@@ -3,6 +3,7 @@ import { AppState } from "@/AppState";
 import { vaultsService } from "@/services/VaultsService";
 import { logger } from "@/utils/Logger";
 import Pop from "@/utils/Pop";
+import { Modal } from "bootstrap";
 import { computed, ref } from "vue";
 
 
@@ -16,6 +17,13 @@ const editableVaultData = ref({
 async function createVault() {
   try {
     await vaultsService.createVault(editableVaultData.value)
+    editableVaultData.value = {
+      name: '',
+      img: '',
+      description: '',
+      isPrivate: false
+    }
+    Modal.getInstance('#newVaultModal').hide()
   }
   catch (error) {
     Pop.meow(error);
@@ -42,8 +50,7 @@ async function createVault() {
     </div>
     <div id="vaultIsPrivateHelp" class="form-text text-end">Private vaults can only be seen by you</div>
     <div class="form-check d-flex justify-content-end align-items-center mb-4 gap-1">
-      <input v-model="editableVaultData.isPrivate" class="form-check-input" type="checkbox" value="" id="isPrivate"
-        required>
+      <input v-model="editableVaultData.isPrivate" class="form-check-input" type="checkbox" value="" id="isPrivate">
       <label class="form-check-label" for="isPrivate">
         Make Vault Private?
       </label>

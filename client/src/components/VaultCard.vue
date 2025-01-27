@@ -1,24 +1,31 @@
 <script setup>
+import { AppState } from "@/AppState";
 import { Vault } from "@/models/Vault";
+import { computed } from "vue";
 
 
 defineProps({
   vault: { type: Vault, required: true }
 })
 
+const account = computed(() => AppState.account)
+
 </script>
 
 
 <template>
   <div>
-    <router-link :to="{ name: 'Vault', params: { vaultId: vault.id } }">
-      <div :style="{ backgroundImage: `url(${vault.img})` }" class="vault-card mb-3">
+    <div :style="{ backgroundImage: `url(${vault.img})` }" class="vault-card mb-3">
+      <div v-if="vault.creatorId == account?.id" class="text-end">
+        <button class="btn" type="button" title="Delete Vault"><i class="mdi mdi-close-circle text-danger"></i></button>
+      </div>
+      <router-link :to="{ name: 'Vault', params: { vaultId: vault.id } }">
         <div class="vault-info d-flex justify-content-between align-items-center p-2">
           <h5 class="text-uppercase">{{ vault.name }}</h5>
           <i v-if="vault.isPrivate" class="mdi mdi-lock-check-outline fs-5"></i>
         </div>
-      </div>
-    </router-link>
+      </router-link>
+    </div>
   </div>
 </template>
 
