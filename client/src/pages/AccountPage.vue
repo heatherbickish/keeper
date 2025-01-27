@@ -12,7 +12,7 @@ import { vaultsService } from "@/services/VaultsService.js";
 
 const account = computed(() => AppState.account)
 const keeps = computed(() => AppState.keeps)
-const vautls = computed(() => AppState.vaults)
+const vaults = computed(() => AppState.vaults)
 const route = useRoute()
 
 onMounted(() => {
@@ -65,7 +65,7 @@ async function getMyVaults() {
             </div>
             <div class="text-center">
               <h1 class="mb-3 fw-bold">{{ account.name }}</h1>
-              <p>{{ vautls.length }} Vaults | {{ keeps.length }} Keeps</p>
+              <p>{{ vaults.length }} Vaults | {{ keeps.length }} Keeps</p>
             </div>
           </div>
         </div>
@@ -79,8 +79,8 @@ async function getMyVaults() {
             <h2 class="mb-3 fw-bold">Vaults</h2>
           </div>
           <div class="row justify-content-center">
-            <div class="col-md-3">
-              <!-- <VaultCard :vault="vault"/> -->
+            <div v-for="vault in vaults" :key="vault.id" class="col-md-3">
+              <VaultCard :vault="vault" />
             </div>
           </div>
         </div>
