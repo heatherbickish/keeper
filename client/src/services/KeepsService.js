@@ -4,6 +4,11 @@ import { AppState } from "@/AppState.js"
 import { logger } from "@/utils/Logger.js"
 
 class KeepsService {
+  async getKeepsByVaultId(vaultId) {
+    AppState.keeps = []
+    const response = await api.get(`api/vaults/${vaultId}/keeps`)
+    AppState.keeps = response.data.map(keep => new Keep(keep))
+  }
   async getMyKeeps(accountId) {
     const response = await api.get(`api/profiles/${accountId}/keeps`)
     const keeps = response.data.map(keep => new Keep(keep))
@@ -26,6 +31,7 @@ class KeepsService {
     AppState.keeps = keeps
   }
   async getKeepById(keepId) {
+    AppState.activeKeep = null
     const response = await api.get(`api/keeps/${keepId}`)
     const keep = new Keep(response.data)
     AppState.activeKeep = keep

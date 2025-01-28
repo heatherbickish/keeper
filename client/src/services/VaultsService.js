@@ -4,6 +4,7 @@ import { AppState } from "@/AppState.js"
 
 class VaultsService {
   async getVaultById(vaultId) {
+    AppState.activeVault = null
     const response = await api.get(`api/vaults/${vaultId}`)
     const vault = new Vault(response.data)
     AppState.activeVault = vault
