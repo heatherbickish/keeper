@@ -3,6 +3,11 @@ import { Vault } from "@/models/Vault.js"
 import { AppState } from "@/AppState.js"
 
 class VaultsService {
+  async getVaultById(vaultId) {
+    const response = await api.get(`api/vaults/${vaultId}`)
+    const vault = new Vault(response.data)
+    AppState.activeVault = vault
+  }
   async deleteVault(vaultId) {
     const response = await api.delete(`api/vaults/${vaultId}`)
     const vaultIndex = AppState.vaults.findIndex(vault => vault.id == vaultId)
