@@ -7,7 +7,7 @@ import { Modal } from "bootstrap";
 import { computed, ref } from "vue";
 
 
-
+const account = computed(() => AppState.account)
 const keep = computed(() => AppState.activeKeep)
 const myVaults = computed(() => AppState.vaults)
 
@@ -43,7 +43,7 @@ async function createVaultKeep(keepId) {
           <h1 class="modal-title fs-5" id="keepModalLabel">Modal title</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div> -->
-        <div class="modal-body" id="keepModalLabel">
+        <div class="modal-body">
           <div v-if="keep">
             <div class="d-flex">
               <img :src="keep.img" :alt="'A picture by ' + keep.creator" class="keep-img">
@@ -51,11 +51,11 @@ async function createVaultKeep(keepId) {
                 <i class="mdi mdi-eye fs-5">{{ keep.views }}</i>
                 <i class="mdi mdi-alpha-k-box-outline fs-5 ms-3"> {{ keep.kept }}</i>
                 <div class="p-3 mt-5">
-                  <h2 class="text-center">{{ keep.name }}</h2>
+                  <h2 class="text-center" id="keepModalLabel">{{ keep.name }}</h2>
                   <p>{{ keep.description }}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                  <form @submit.prevent="createVaultKeep(keep.id)">
+                  <form v-if="account" @submit.prevent="createVaultKeep(keep.id)">
                     <div class="d-flex gap-2">
                       <select v-model="editableVaultKeepData.vaultId" class="form-select " role="button"
                         aria-label="Select a vault" required>

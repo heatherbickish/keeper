@@ -45,10 +45,10 @@ async function deleteKeep(keepId) {
       </button>
     </div>
     <div class="keep-info d-flex justify-content-between align-items-center p-3">
-      <h5 @click="getKeepById(keep.id)" data-bs-toggle="modal" data-bs-target="#keepModal" role="button"
+      <span @click="getKeepById(keep.id)" class="fs-5" data-bs-toggle="modal" data-bs-target="#keepModal" role="button"
         :title="'See details of ' + keep.name">
         {{ keep.name }}
-      </h5>
+      </span>
       <router-link :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
         <img :src="keep.creator.picture" :alt="'A picture of' + keep.creator.name" class="creator-img">
       </router-link>
@@ -81,7 +81,7 @@ async function deleteKeep(keepId) {
   right: 0;
 }
 
-h5 {
+span {
   text-shadow: 1px 1.2px rgb(61, 59, 59);
   font-weight: 600;
   color: rgb(238, 233, 233);
