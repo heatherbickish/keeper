@@ -7,7 +7,7 @@ class KeepsService {
   async getKeepsByVaultId(vaultId) {
     AppState.keeps = []
     const response = await api.get(`api/vaults/${vaultId}/keeps`)
-    AppState.keeps = response.data.map(keep => new Keep(keep))
+    AppState.keptKeeps = response.data.map(keep => new Keep(keep))
   }
   async getMyKeeps(accountId) {
     const response = await api.get(`api/profiles/${accountId}/keeps`)
