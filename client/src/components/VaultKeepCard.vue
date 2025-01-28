@@ -11,10 +11,10 @@ defineProps({
 
 
 <template>
-  <div>
+  <div class="mt-5">
     <div :style="{ backgroundImage: `url(${keptKeep.img})` }" class="kept-card">
       <div class="kept-info">
-        <h5 class="text-uppercase" data-bs-toggle="modal" data-bs-target="#vaultKeepModal">{{ keptKeep.name }}</h5>
+        <h5 class="text-uppercase ms-3" data-bs-toggle="modal" data-bs-target="#vaultKeepModal">{{ keptKeep.name }}</h5>
       </div>
     </div>
   </div>

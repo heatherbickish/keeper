@@ -8,6 +8,7 @@ class VaultKeepsService {
     const response = await api.post('api/vaultkeeps', vaultKeepData)
     const vaultKeep = new VaultKeep(response.data)
     AppState.vaultKeeps.push(vaultKeep)
+    AppState.activeKeep.kept += 1
   }
 
 }

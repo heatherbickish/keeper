@@ -2,7 +2,6 @@
 import { AppState } from "@/AppState";
 import { Keep } from "@/models/Keep";
 import { computed } from "vue";
-import KeepModal from "./KeepModal.vue";
 import Pop from "@/utils/Pop";
 import { logger } from "@/utils/Logger";
 import { keepsService } from "@/services/KeepsService";
@@ -54,7 +53,8 @@ async function deleteKeep(keepId) {
         <img :src="keep.creator.picture" :alt="'A picture of' + keep.creator.name" class="creator-img">
       </router-link>
     </div>
-    <KeepModal />
+    <!-- Move this thing -->
+    <!-- <KeepModal /> -->
   </div>
 </template>
 

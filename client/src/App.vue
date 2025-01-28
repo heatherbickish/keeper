@@ -3,6 +3,7 @@ import Navbar from './components/Navbar.vue';
 import { AppState } from './AppState.js';
 import NewKeepModal from "./components/NewKeepModal.vue";
 import NewVaultModal from "./components/NewVaultModal.vue";
+import KeepModal from "./components/KeepModal.vue";
 
 </script>
 
@@ -12,6 +13,7 @@ import NewVaultModal from "./components/NewVaultModal.vue";
   </header>
   <main>
     <router-view />
+    <KeepModal />
   </main>
   <footer>
 

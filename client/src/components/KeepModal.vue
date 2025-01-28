@@ -1,10 +1,12 @@
 <script setup>
 import { AppState } from "@/AppState";
+import { router } from "@/router";
 import { keepsService } from "@/services/KeepsService";
 import { vaultKeepsService } from "@/services/VaultKeepsService";
 import { vaultsService } from "@/services/VaultsService";
 import { logger } from "@/utils/Logger";
 import Pop from "@/utils/Pop";
+import { Modal } from "bootstrap";
 import { computed, onMounted, ref } from "vue";
 
 
@@ -12,31 +14,16 @@ import { computed, onMounted, ref } from "vue";
 const keep = computed(() => AppState.activeKeep)
 const myVaults = computed(() => AppState.vaults)
 
-const editableVaultKeepData = ref(
-  {
-    vaultId: '',
-    keepId: ''
-
-  })
-
-onMounted(() => {
-  getMyVaults()
+const editableVaultKeepData = ref({
+  vaultId: '',
+  keepId: ''
 })
-
-async function getMyVaults() {
-  try {
-    await vaultsService.getMyVaults()
-  }
-  catch (error) {
-    Pop.meow(error);
-    logger.error(error)
-  }
-}
 
 async function createVaultKeep(keepId) {
   try {
     editableVaultKeepData.value.keepId = keep.value.id
     await vaultKeepsService.createVaultKeep(editableVaultKeepData.value)
+    Modal.getInstance('#keepModal').hide()
   }
   catch (error) {
     Pop.meow(error);
@@ -69,11 +56,11 @@ async function createVaultKeep(keepId) {
                 <div class="d-flex justify-content-between align-items-center">
                   <form @submit.prevent="createVaultKeep(keep.id)">
                     <div class="d-flex gap-2">
-                      <select v-model="editableVaultKeepData.vaultId" class="form-select" aria-label="Select a vault"
-                        required>
+                      <select v-model="editableVaultKeepData.vaultId" class="form-select " role="button"
+                        aria-label="Select a vault" required>
                         <option selected value="" disabled>Choose a vault</option>
                         <option v-for="vault in myVaults" :key="'keepModal' + vault.id" :value="vault.id"
-                          class="text-uppercase">{{ vault.name }}</option>
+                          class="text-uppercase" role="button">{{ vault.name }}</option>
                       </select>
                       <div>
                         <button class="btn btn-small save-button" type="submit" title="Save to vault">Save</button>

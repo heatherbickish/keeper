@@ -2,12 +2,13 @@ import { api } from "./AxiosService.js"
 import { Keep } from "@/models/Keep.js"
 import { AppState } from "@/AppState.js"
 import { logger } from "@/utils/Logger.js"
+import { KeptKeep } from "@/models/KeptKeep.js"
 
 class KeepsService {
   async getKeepsByVaultId(vaultId) {
     AppState.keeps = []
     const response = await api.get(`api/vaults/${vaultId}/keeps`)
-    AppState.keptKeeps = response.data.map(keep => new Keep(keep))
+    AppState.keptKeeps = response.data.map(keep => new KeptKeep(keep))
   }
   async getMyKeeps(accountId) {
     const response = await api.get(`api/profiles/${accountId}/keeps`)
@@ -22,7 +23,7 @@ class KeepsService {
   async createKeep(keepData) {
     const response = await api.post('api/keeps', keepData)
     const createdKeep = new Keep(response.data)
-    if (keepData.creatorId != AppState.activeProfile.id) return
+    // if (keepData.creatorId != AppState.account.id) return
     AppState.keeps.unshift(createdKeep)
   }
   async GetKeepsByProfileId(profileId) {
