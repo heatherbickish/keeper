@@ -37,6 +37,7 @@ class KeepsService {
     AppState.activeKeep = keep
   }
   async getAllKeeps() {
+    AppState.keeps = []
     const response = await api.get('api/keeps')
     const keeps = response.data.map(keep => new Keep(keep))
     AppState.keeps = keeps

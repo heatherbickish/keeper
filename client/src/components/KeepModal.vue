@@ -1,5 +1,7 @@
 <script setup>
 import { AppState } from "@/AppState";
+import { keepsService } from "@/services/KeepsService";
+import { vaultKeepsService } from "@/services/VaultKeepsService";
 import { vaultsService } from "@/services/VaultsService";
 import { logger } from "@/utils/Logger";
 import Pop from "@/utils/Pop";
@@ -9,10 +11,13 @@ import { computed, onMounted, ref } from "vue";
 
 const keep = computed(() => AppState.activeKeep)
 const myVaults = computed(() => AppState.vaults)
-// const myVaults = computed(() => AppState.vaults.filter(vault => vault.creatorId != AppState.account?.id))
-// const vaults = computed(() => AppState.vaults.filter(vault => vault.creatorId != AppState.account?.id))
 
-const editableVaultKeepData = ref({ vaultId: '' })
+const editableVaultKeepData = ref(
+  {
+    vaultId: '',
+    keepId: ''
+
+  })
 
 onMounted(() => {
   getMyVaults()
@@ -21,6 +26,17 @@ onMounted(() => {
 async function getMyVaults() {
   try {
     await vaultsService.getMyVaults()
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
+
+async function createVaultKeep(keepId) {
+  try {
+    editableVaultKeepData.value.keepId = keep.value.id
+    await vaultKeepsService.createVaultKeep(editableVaultKeepData.value)
   }
   catch (error) {
     Pop.meow(error);
@@ -51,15 +67,17 @@ async function getMyVaults() {
                   <p>{{ keep.description }}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                  <form>
-                    <div>
-
+                  <form @submit.prevent="createVaultKeep(keep.id)">
+                    <div class="d-flex gap-2">
                       <select v-model="editableVaultKeepData.vaultId" class="form-select" aria-label="Select a vault"
                         required>
                         <option selected value="" disabled>Choose a vault</option>
                         <option v-for="vault in myVaults" :key="'keepModal' + vault.id" :value="vault.id"
                           class="text-uppercase">{{ vault.name }}</option>
                       </select>
+                      <div>
+                        <button class="btn btn-small save-button" type="submit" title="Save to vault">Save</button>
+                      </div>
                     </div>
                   </form>
                   <router-link :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
@@ -106,5 +124,10 @@ i {
   bottom: 0;
   // left: 0;
   // right: 0;
+}
+
+.save-button {
+  background-color: rgb(146, 118, 146);
+  color: white;
 }
 </style>
