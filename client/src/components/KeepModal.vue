@@ -1,11 +1,32 @@
 <script setup>
 import { AppState } from "@/AppState";
-import { computed } from "vue";
+import { vaultsService } from "@/services/VaultsService";
+import { logger } from "@/utils/Logger";
+import Pop from "@/utils/Pop";
+import { computed, onMounted, ref } from "vue";
 
 
 
 const keep = computed(() => AppState.activeKeep)
-const vaults = computed(() => AppState.vaults.filter(vault => vault.creatorId != AppState.account?.id))
+const myVaults = computed(() => AppState.vaults)
+// const myVaults = computed(() => AppState.vaults.filter(vault => vault.creatorId != AppState.account?.id))
+// const vaults = computed(() => AppState.vaults.filter(vault => vault.creatorId != AppState.account?.id))
+
+const editableVaultKeepData = ref({ vaultId: '' })
+
+onMounted(() => {
+  getMyVaults()
+})
+
+async function getMyVaults() {
+  try {
+    await vaultsService.getMyVaults()
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
 
 </script>
 
@@ -30,18 +51,17 @@ const vaults = computed(() => AppState.vaults.filter(vault => vault.creatorId !=
                   <p>{{ keep.description }}</p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-
-                  <!-- TODO create vaultkeep -->
-                  <!-- <form>
+                  <form>
                     <div>
-                      <select class="form-select" aria-label="Select a vault" required>
-                        <option value="" disabled>Choose a vault</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+
+                      <select v-model="editableVaultKeepData.vaultId" class="form-select" aria-label="Select a vault"
+                        required>
+                        <option selected value="" disabled>Choose a vault</option>
+                        <option v-for="vault in myVaults" :key="'keepModal' + vault.id" :value="vault.id"
+                          class="text-uppercase">{{ vault.name }}</option>
                       </select>
                     </div>
-                  </form> -->
+                  </form>
                   <router-link :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
                     <img :src="keep.creator.picture" :alt="'A picture of ' + keep.creator.name" class="creator-img"
                       data-bs-dismiss="modal">
