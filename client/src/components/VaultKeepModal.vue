@@ -1,15 +1,9 @@
 <script setup>
 import { AppState } from "@/AppState";
-import { vaultKeepsService } from "@/services/VaultKeepsService";
-import { logger } from "@/utils/Logger";
-import Pop from "@/utils/Pop";
 import { computed } from "vue";
 
 
 const keptKeep = computed(() => AppState.activeKeep)
-
-
-
 
 </script>
 

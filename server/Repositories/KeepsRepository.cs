@@ -22,7 +22,7 @@ public class KeepsRepository
       SELECT
       keeps.*,
       accounts.*
-      FROM keeps
+      FROM keeps_with_kept_view keeps
       JOIN accounts ON accounts.id = keeps.creator_id
       WHERE keeps.id = LAST_INSERT_ID();";
 
@@ -58,7 +58,7 @@ public class KeepsRepository
       SELECT
       keeps.*,
       accounts.*
-      FROM keeps
+      FROM keeps_with_kept_view keeps
       JOIN accounts ON accounts.id = keeps.creator_id
       WHERE keeps.id = @keepId;";
 
