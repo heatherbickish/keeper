@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from "@/AppState";
+import KeepCard from "@/components/KeepCard.vue";
 import { router } from "@/router";
 import { keepsService } from "@/services/KeepsService";
 import { vaultsService } from "@/services/VaultsService";
@@ -54,12 +55,19 @@ async function getKeepsByVaultId() {
             <div :style="{ backgroundImage: `url(${vault.img})` }" class="vault-img">
               <div class="text-center vault-info mb-5">
                 <h1 class="mb-2">{{ vault.name }}</h1>
-                <h3>by {{ vault.creator.name }}</h3>
+                <h4>by {{ vault.creator.name }}</h4>
               </div>
             </div>
             <div class="text-center mt-4">
               <span class="rounded px-1 py-1">{{ keeps.length }} Keeps</span>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="masonry-container">
+          <div v-for="keep in keeps" :key="keep.id" class="mb-3 mx-2">
+            <KeepCard :keep="keep" />
           </div>
         </div>
       </div>
@@ -91,7 +99,7 @@ h1 {
   text-shadow: 1px 1.2px rgb(61, 59, 59);
 }
 
-h3 {
+h4 {
   text-shadow: 1px 1.2px rgb(61, 59, 59);
   color: rgb(238, 233, 233);
 }
@@ -101,5 +109,16 @@ span {
   font-size: 30px;
   font-weight: 500;
   color: rgb(17, 17, 17)
+}
+
+.masonry-container {
+  columns: 250px;
+
+  >* {
+    break-inside: avoid;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+  }
 }
 </style>
