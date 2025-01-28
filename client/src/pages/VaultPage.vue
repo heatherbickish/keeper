@@ -1,6 +1,5 @@
 <script setup>
 import { AppState } from "@/AppState";
-import KeepCard from "@/components/KeepCard.vue";
 import { router } from "@/router";
 import { keepsService } from "@/services/KeepsService";
 import { vaultsService } from "@/services/VaultsService";
@@ -12,7 +11,6 @@ import { useRoute } from "vue-router";
 
 const route = useRoute()
 const vault = computed(() => AppState.activeVault)
-const keeps = computed(() => AppState.keeps)
 
 
 onMounted(() => {
@@ -59,15 +57,14 @@ async function getKeepsByVaultId() {
               </div>
             </div>
             <div class="text-center mt-4">
-              <span class="rounded px-1 py-1">{{ keeps.length }} Keeps</span>
+              <span class="rounded px-1 py-1"> Keeps</span>
             </div>
           </div>
         </div>
       </div>
       <div class="col-md-12">
         <div class="masonry-container">
-          <div v-for="keep in keeps" :key="keep.id" class="mb-3 mx-2">
-            <KeepCard :keep="keep" />
+          <div class="mb-3 mx-2">
           </div>
         </div>
       </div>
