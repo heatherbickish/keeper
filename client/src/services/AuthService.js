@@ -7,8 +7,10 @@ import { socketService } from './SocketService.js'
 import { vaultsService } from "./VaultsService.js"
 import Pop from "@/utils/Pop.js"
 import { logger } from "@/utils/Logger.js"
+import { keepsService } from "./KeepsService.js"
+import { computed } from "vue"
 
-
+const account = computed(() => AppState.account)
 export const AuthService = initialize({
   domain,
   clientId,
@@ -28,6 +30,14 @@ AuthService.on(AUTH_EVENTS.AUTHENTICATED, async function () {
 
   try {
     await vaultsService.getMyVaults()
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+
+  try {
+    await keepsService.getMyKeeps(account.value.id)
   }
   catch (error) {
     Pop.meow(error);

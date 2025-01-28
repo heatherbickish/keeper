@@ -94,7 +94,7 @@ async function getKeepsByVaultId() {
 }
 
 h1 {
-  font-size: 100px;
+  font-size: 80px;
   color: rgb(238, 233, 233);
   text-shadow: 1px 1.2px rgb(61, 59, 59);
 }

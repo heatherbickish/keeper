@@ -2,8 +2,12 @@
 import { computed } from "vue";
 import Login from './Login.vue';
 import { AppState } from "@/AppState";
+import { useRoute } from "vue-router";
 
+const route = useRoute()
 const account = computed(() => AppState.account)
+const profile = computed(() => AppState.activeProfile)
+const profileId = route.params.profileId
 </script>
 
 <template>

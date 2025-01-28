@@ -16,15 +16,10 @@ const vaults = computed(() => AppState.vaults)
 const route = useRoute()
 
 
-// watch(account, () => {
-//   getMyKeeps()
-//   getMyVaults()
-// }, { immediate: true })
-
-onMounted(() => {
-  getMyKeeps()
+watch(account, () => {
   getMyVaults()
-})
+}, { immediate: true })
+
 
 async function getMyVaults() {
   try {
@@ -36,15 +31,6 @@ async function getMyVaults() {
   }
 }
 
-async function getMyKeeps() {
-  try {
-    await keepsService.getMyKeeps(account.value.id)
-  }
-  catch (error) {
-    Pop.meow(error);
-    logger.error(error)
-  }
-}
 
 </script>
 

@@ -43,8 +43,8 @@ async function getKeptKeepById(keptKeepId) {
   <div class="mt-5">
     <div :style="{ backgroundImage: `url(${keptKeep.img})` }" class="kept-card">
       <div class="text-end">
-        <button @click="deleteVaultKeep(keptKeep.vaultKeepId)" class="btn" type="button" title="Delete from vault"><i
-            class="mdi mdi-close-circle text-danger"></i></button>
+        <button @click="deleteVaultKeep(keptKeep.vaultKeepId)" v-if="keptKeep.creatorId == account?.id" class="btn"
+          type="button" title="Delete from vault"><i class="mdi mdi-close-circle text-danger"></i></button>
       </div>
       <div class="kept-info">
         <h5 @click="getKeptKeepById(keptKeep.id)" class="text-uppercase ms-3" data-bs-toggle="modal"
