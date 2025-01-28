@@ -1,22 +1,22 @@
 <script setup>
 import { AppState } from "@/AppState";
+import { vaultKeepsService } from "@/services/VaultKeepsService";
+import { logger } from "@/utils/Logger";
+import Pop from "@/utils/Pop";
 import { computed } from "vue";
 
 
-const keptKeep = computed(() => AppState.activeKeptKeep)
+const keptKeep = computed(() => AppState.activeKeep)
+
+
+
 
 </script>
 
 
 <template>
-  <!-- Button trigger modal -->
-  <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vaultKeepModal">
-    Launch demo modal
-  </button> -->
-
-  <!-- Modal -->
   <div class="modal fade" id="vaultKeepModal" tabindex="-1" aria-labelledby="vaultKeepModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <!-- <div class="modal-header">
         <h1 class="modal-title fs-5" id="vaultKeepModalLabel">Modal title</h1>
@@ -26,15 +26,16 @@ const keptKeep = computed(() => AppState.activeKeptKeep)
           <div v-if="keptKeep">
             <div class="d-flex">
               <img :src="keptKeep.img" :alt="'A picture by ' + keptKeep.creator" class="kept-img">
-              <div>
+              <div class="text-center p-4 mb-5">
+                <i class="mdi mdi-eye fs-5">{{ keptKeep.views }}</i>
+                <i class="mdi mdi-alpha-k-box-outline fs-5 ms-3"> {{ keptKeep.kept }}</i>
                 <div class="p-3 mt-5">
                   <h2 class="text-center">{{ keptKeep.name }}</h2>
                   <p>{{ keptKeep.description }}</p>
                 </div>
-                <div class="d-flex justify-content-between align-items-center">
-
+                <div class="d-flex justify-content-end">
                   <img :src="keptKeep.creator.picture" :alt="'A picture of ' + keptKeep.creator.name"
-                    class="creator-img" data-bs-dismiss="modal">
+                    class="creator-img" data-bs-dismiss="modal" role="button">
                 </div>
               </div>
               <div>
@@ -43,7 +44,7 @@ const keptKeep = computed(() => AppState.activeKeptKeep)
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { logger } from "@/utils/Logger.js"
 import { KeptKeep } from "@/models/KeptKeep.js"
 
 class KeepsService {
+
   async getKeepsByVaultId(vaultId) {
     AppState.keeps = []
     const response = await api.get(`api/vaults/${vaultId}/keeps`)

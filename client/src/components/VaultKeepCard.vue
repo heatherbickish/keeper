@@ -6,6 +6,7 @@ import { AppState } from "@/AppState";
 import Pop from "@/utils/Pop";
 import { logger } from "@/utils/Logger";
 import { vaultKeepsService } from "@/services/VaultKeepsService";
+import { keepsService } from "@/services/KeepsService";
 
 const account = computed(() => AppState.account)
 
@@ -25,6 +26,16 @@ async function deleteVaultKeep(vaultKeepId) {
   }
 }
 
+async function getKeptKeepById(keptKeepId) {
+  try {
+    await keepsService.getKeepById(keptKeepId)
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
+
 </script>
 
 
@@ -36,7 +47,9 @@ async function deleteVaultKeep(vaultKeepId) {
             class="mdi mdi-close-circle text-danger"></i></button>
       </div>
       <div class="kept-info">
-        <h5 class="text-uppercase ms-3" data-bs-toggle="modal" data-bs-target="#vaultKeepModal">{{ keptKeep.name }}</h5>
+        <h5 @click="getKeptKeepById(keptKeep.id)" class="text-uppercase ms-3" data-bs-toggle="modal"
+          data-bs-target="#vaultKeepModal" role="button">{{
+            keptKeep.name }}</h5>
       </div>
     </div>
   </div>
