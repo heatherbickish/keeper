@@ -53,8 +53,6 @@ async function deleteKeep(keepId) {
         <img :src="keep.creator.picture" :alt="'A picture of' + keep.creator.name" class="creator-img">
       </router-link>
     </div>
-    <!-- Move this thing -->
-    <!-- <KeepModal /> -->
   </div>
 </template>
 

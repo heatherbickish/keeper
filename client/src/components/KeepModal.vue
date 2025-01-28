@@ -20,6 +20,10 @@ async function createVaultKeep(keepId) {
   try {
     editableVaultKeepData.value.keepId = keep.value.id
     await vaultKeepsService.createVaultKeep(editableVaultKeepData.value)
+    editableVaultKeepData.value = {
+      vaultId: '',
+      keepId: ''
+    }
     Modal.getInstance('#keepModal').hide()
   }
   catch (error) {
