@@ -1,11 +1,29 @@
 <script setup>
 import { KeptKeep } from "@/models/KeptKeep";
 import VaultKeepModal from "./VaultKeepModal.vue";
+import { computed } from "vue";
+import { AppState } from "@/AppState";
+import Pop from "@/utils/Pop";
+import { logger } from "@/utils/Logger";
+import { vaultKeepsService } from "@/services/VaultKeepsService";
 
+const account = computed(() => AppState.account)
 
-defineProps({
+const props = defineProps({
   keptKeep: { type: KeptKeep, required: true }
 })
+
+async function deleteVaultKeep(vaultKeepId) {
+  try {
+    const yes = await Pop.confirm(`Are you sure you want to delete ${props.keptKeep.name} from this vault?`)
+    if (!yes) return
+    await vaultKeepsService.deleteVaultKeep(vaultKeepId)
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+}
 
 </script>
 
@@ -13,6 +31,10 @@ defineProps({
 <template>
   <div class="mt-5">
     <div :style="{ backgroundImage: `url(${keptKeep.img})` }" class="kept-card">
+      <div class="text-end">
+        <button @click="deleteVaultKeep(keptKeep.vaultKeepId)" class="btn" type="button" title="Delete from vault"><i
+            class="mdi mdi-close-circle text-danger"></i></button>
+      </div>
       <div class="kept-info">
         <h5 class="text-uppercase ms-3" data-bs-toggle="modal" data-bs-target="#vaultKeepModal">{{ keptKeep.name }}</h5>
       </div>
