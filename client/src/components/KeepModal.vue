@@ -44,20 +44,28 @@ async function createVaultKeep(keepId) {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div> -->
         <div class="modal-body">
-          <div v-if="keep">
-            <div class="d-flex">
-              <img :src="keep.img" :alt="'A picture by ' + keep.creator" class="keep-img">
-              <div class="text-center p-4 mb-5">
-                <i class="mdi mdi-eye fs-5">{{ keep.views }}</i>
-                <i class="mdi mdi-alpha-k-box-outline fs-5 ms-3"> {{ keep.kept }}</i>
-                <div class="p-3 mt-5">
-                  <h2 class="text-center" id="keepModalLabel">{{ keep.name }}</h2>
+          <div v-if="keep" class="container">
+            <div class="row justify-content-between">
+              <div class="col-md-6">
+                <div>
+                  <img :src="keep.img" :alt="'A picture by ' + keep.creator" class="keep-img">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="text-center mt-3">
+                  <i class="mdi mdi-eye fs-5">{{ keep.views }}</i>
+                  <i class="mdi mdi-alpha-k-box-outline fs-5 ms-3"> {{ keep.kept }}</i>
+                </div>
+                <div class="text-center mt-md-5">
+                  <h2 id="keepModalLabel">{{ keep.name }}</h2>
+                </div>
+                <div class="mt-md-5 mt-3 p-2">
                   <p>{{ keep.description }}</p>
                 </div>
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center justify-content-center mt-md-5">
                   <form v-if="account" @submit.prevent="createVaultKeep(keep.id)">
                     <div class="d-flex gap-2">
-                      <select v-model="editableVaultKeepData.vaultId" class="form-select " role="button"
+                      <select v-model="editableVaultKeepData.vaultId" class="form-select w-50" role="button"
                         aria-label="Select a vault" required>
                         <option selected value="" disabled>Choose a vault</option>
                         <option v-for="vault in myVaults" :key="'keepModal' + vault.id" :value="vault.id"
@@ -73,8 +81,6 @@ async function createVaultKeep(keepId) {
                       data-bs-dismiss="modal">
                   </router-link>
                 </div>
-              </div>
-              <div>
               </div>
             </div>
           </div>
@@ -92,7 +98,7 @@ async function createVaultKeep(keepId) {
 <style lang="scss" scoped>
 .keep-img {
   height: 500px;
-  width: 400px;
+  width: 100%;
   object-fit: cover;
 }
 
