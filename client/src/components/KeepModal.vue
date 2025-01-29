@@ -59,7 +59,7 @@ async function createVaultKeep(keepId) {
                 <div class="text-center mt-md-5">
                   <h2 id="keepModalLabel">{{ keep.name }}</h2>
                 </div>
-                <div class="mt-md-5 mt-3 p-2">
+                <div class="text-center mt-md-5 mt-3 p-2">
                   <p>{{ keep.description }}</p>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mt-md-5">

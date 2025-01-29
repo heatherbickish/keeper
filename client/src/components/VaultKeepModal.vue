@@ -17,8 +17,32 @@ const keptKeep = computed(() => AppState.activeKeep)
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div> -->
         <div class="modal-body" id="vaultKeepModalLabel">
-          <div v-if="keptKeep">
-            <div class="d-flex">
+          <div v-if="keptKeep" class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                <div>
+                  <img :src="keptKeep.img" :alt="'A picture by ' + keptKeep.creator" class="kept-img">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="text-center mt-3">
+                  <i class="mdi mdi-eye fs-5">{{ keptKeep.views }}</i>
+                  <i class="mdi mdi-alpha-k-box-outline fs-5 ms-3"> {{ keptKeep.kept }}</i>
+                </div>
+                <div class="text-center mt-md-5">
+                  <h2>{{ keptKeep.name }}</h2>
+                </div>
+                <div class="text-center mt-md-4">
+                  <img :src="keptKeep.creator.picture" :alt="'A picture of ' + keptKeep.creator.name"
+                    class="creator-img" data-bs-dismiss="modal" role="button">
+                </div>
+                <div class=" text-center mt-md-5 p-2">
+                  <p>{{ keptKeep.description }}</p>
+                </div>
+
+              </div>
+            </div>
+            <!-- <div class="d-flex">
               <img :src="keptKeep.img" :alt="'A picture by ' + keptKeep.creator" class="kept-img">
               <div class="text-center p-4 mb-5">
                 <i class="mdi mdi-eye fs-5">{{ keptKeep.views }}</i>
@@ -34,7 +58,7 @@ const keptKeep = computed(() => AppState.activeKeep)
               </div>
               <div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="modal-footer">
@@ -49,7 +73,7 @@ const keptKeep = computed(() => AppState.activeKeep)
 <style lang="scss" scoped>
 .kept-img {
   height: 500px;
-  width: 400px;
+  width: 100%;
   object-fit: cover;
 }
 
