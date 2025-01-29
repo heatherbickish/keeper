@@ -64,13 +64,13 @@ i {
   height: 3rem;
   border-radius: 50%;
   aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center;
   border: 1px solid rgb(100, 97, 97);
 }
 
 .kept-info {
   position: absolute;
   bottom: 0;
-  // left: 0;
-  // right: 0;
 }
 </style>

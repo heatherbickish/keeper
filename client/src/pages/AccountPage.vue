@@ -137,6 +137,12 @@ async function getMyKeeps() {
   }
 }
 
+@media screen and (max-width:768px) {
+  .masonry-container {
+    columns: 2;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .account-sticky {
     position: relative;
