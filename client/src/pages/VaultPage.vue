@@ -51,7 +51,7 @@ async function getKeepsByVaultId() {
     <section class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <div class="mt-5">
+          <div class="mt-4">
             <div :style="{ backgroundImage: `url(${vault.img})` }" class="vault-img">
               <div class="text-center vault-info mb-5">
                 <h1 class="mb-2">{{ vault.name }}</h1>

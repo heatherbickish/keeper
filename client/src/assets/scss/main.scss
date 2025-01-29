@@ -1,9 +1,12 @@
 @import "./_variables.scss";
 @import "./_utilities.scss";
 @import "./loaders.scss";
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Oranienbaum&display=swap');
+
 
 body {
   overscroll-behavior: none;
+  font-family: "Oranienbaum", serif;
 }
 
 #app {
@@ -20,4 +23,3 @@ main {
 a {
   text-decoration: none;
 }
-

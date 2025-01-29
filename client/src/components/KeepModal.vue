@@ -39,10 +39,6 @@ async function createVaultKeep(keepId) {
   <div class="modal fade" id="keepModal" tabindex="-1" aria-labelledby="keepModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <!-- <div class="modal-header">
-          <h1 class="modal-title fs-5" id="keepModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div> -->
         <div class="modal-body">
           <div v-if="keep" class="container">
             <div class="row justify-content-between">
@@ -64,7 +60,7 @@ async function createVaultKeep(keepId) {
                 </div>
                 <div class="d-flex align-items-center justify-content-center mt-md-5">
                   <form v-if="account" @submit.prevent="createVaultKeep(keep.id)">
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-3">
                       <select v-model="editableVaultKeepData.vaultId" class="form-select w-50" role="button"
                         aria-label="Select a vault" required>
                         <option selected value="" disabled>Choose a vault</option>
@@ -77,8 +73,9 @@ async function createVaultKeep(keepId) {
                     </div>
                   </form>
                   <router-link :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
-                    <img :src="keep.creator.picture" :alt="'A picture of ' + keep.creator.name" class="creator-img"
-                      data-bs-dismiss="modal">
+                    <img :src="keep.creator.picture" :alt="'A picture of ' + keep.creator.name"
+                      :title="keep.creator.name" class="creator-img me-2" data-bs-dismiss="modal">
+                    <span class="text-dark">{{ keep.creator.name }}</span>
                   </router-link>
                 </div>
               </div>
@@ -97,7 +94,7 @@ async function createVaultKeep(keepId) {
 
 <style lang="scss" scoped>
 .keep-img {
-  height: 500px;
+  height: 550px;
   width: 100%;
   object-fit: cover;
 }

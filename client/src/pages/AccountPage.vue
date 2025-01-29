@@ -39,7 +39,7 @@ async function getMyVaults() {
     <section class="container">
       <div class="row justify-content-center">
         <div class="col-md-8">
-          <div class="mt-5">
+          <div class="mt-4">
             <img :src="account.coverImg" :alt="'A cover image by ' + account.name" class="cover-img">
             <div class="text-end dropdown">
               <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"

@@ -43,6 +43,14 @@ AuthService.on(AUTH_EVENTS.AUTHENTICATED, async function () {
     Pop.meow(error);
     logger.error(error)
   }
+
+  // try {
+  //   await keepsService.getAllKeeps()
+  // }
+  // catch (error) {
+  //   Pop.meow(error);
+  //   logger.error(error)
+  // }
 })
 
 async function refreshAuthToken(config) {

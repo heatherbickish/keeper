@@ -38,7 +38,7 @@ async function deleteVault(vaultId) {
       <router-link :to="{ name: 'Vault', params: { vaultId: vault.id } }">
         <div class="vault-info d-flex justify-content-between align-items-center p-2">
           <h5 class="text-uppercase">{{ vault.name }}</h5>
-          <i v-if="vault.isPrivate" class="mdi mdi-lock-check-outline fs-5"></i>
+          <i v-if="vault.isPrivate" class="mdi mdi-lock-check-outline fs-5 me-1"></i>
         </div>
       </router-link>
     </div>
@@ -59,7 +59,7 @@ async function deleteVault(vaultId) {
 
 h5,
 i {
-  text-shadow: 1px 1px rgb(43, 41, 41);
+  text-shadow: 1px 1.5px rgb(43, 41, 41);
   font-weight: 400;
   color: rgb(250, 240, 240);
 }

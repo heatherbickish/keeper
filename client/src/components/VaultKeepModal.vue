@@ -12,11 +12,7 @@ const keptKeep = computed(() => AppState.activeKeep)
   <div class="modal fade" id="vaultKeepModal" tabindex="-1" aria-labelledby="vaultKeepModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <!-- <div class="modal-header">
-        <h1 class="modal-title fs-5" id="vaultKeepModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div> -->
-        <div class="modal-body" id="vaultKeepModalLabel">
+        <div class="modal-body">
           <div v-if="keptKeep" class="container">
             <div class="row justify-content-center">
               <div class="col-md-6">
@@ -29,12 +25,12 @@ const keptKeep = computed(() => AppState.activeKeep)
                   <i class="mdi mdi-eye fs-5">{{ keptKeep.views }}</i>
                   <i class="mdi mdi-alpha-k-box-outline fs-5 ms-3"> {{ keptKeep.kept }}</i>
                 </div>
-                <div class="text-center mt-md-5">
+                <div class="text-center mt-md-5" id="vaultKeepModalLabel">
                   <h2>{{ keptKeep.name }}</h2>
                 </div>
                 <div class="text-center mt-md-4">
                   <img :src="keptKeep.creator.picture" :alt="'A picture of ' + keptKeep.creator.name"
-                    class="creator-img" data-bs-dismiss="modal" role="button">
+                    class="creator-img" :title="keptKeep.creator.name" data-bs-dismiss="modal" role="button">
                 </div>
                 <div class=" text-center mt-md-5 p-2">
                   <p>{{ keptKeep.description }}</p>
@@ -42,23 +38,6 @@ const keptKeep = computed(() => AppState.activeKeep)
 
               </div>
             </div>
-            <!-- <div class="d-flex">
-              <img :src="keptKeep.img" :alt="'A picture by ' + keptKeep.creator" class="kept-img">
-              <div class="text-center p-4 mb-5">
-                <i class="mdi mdi-eye fs-5">{{ keptKeep.views }}</i>
-                <i class="mdi mdi-alpha-k-box-outline fs-5 ms-3"> {{ keptKeep.kept }}</i>
-                <div class="p-3 mt-5">
-                  <h2 class="text-center">{{ keptKeep.name }}</h2>
-                  <p>{{ keptKeep.description }}</p>
-                </div>
-                <div class="d-flex justify-content-end">
-                  <img :src="keptKeep.creator.picture" :alt="'A picture of ' + keptKeep.creator.name"
-                    class="creator-img" data-bs-dismiss="modal" role="button">
-                </div>
-              </div>
-              <div>
-              </div>
-            </div> -->
           </div>
         </div>
         <div class="modal-footer">
