@@ -61,14 +61,14 @@ async function createVaultKeep(keepId) {
                 <div class="d-flex align-items-center justify-content-center mt-md-5">
                   <form v-if="account" @submit.prevent="createVaultKeep(keep.id)">
                     <div class="d-flex gap-3">
-                      <select v-model="editableVaultKeepData.vaultId" class="form-select w-50" role="button"
+                      <select v-model="editableVaultKeepData.vaultId" class="form-select" role="button"
                         aria-label="Select a vault" required>
                         <option selected value="" disabled>Choose a vault</option>
                         <option v-for="vault in myVaults" :key="'keepModal' + vault.id" :value="vault.id"
                           class="text-uppercase" role="button">{{ vault.name }}</option>
                       </select>
                       <div>
-                        <button class="btn btn-small save-button" type="submit" title="Save to vault">Save</button>
+                        <button class="btn btn-small save-button me-3" type="submit" title="Save to vault">Save</button>
                       </div>
                     </div>
                   </form>
@@ -113,8 +113,6 @@ i {
 .keep-info {
   position: absolute;
   bottom: 0;
-  // left: 0;
-  // right: 0;
 }
 
 .save-button {

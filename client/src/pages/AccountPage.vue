@@ -1,24 +1,21 @@
 <script setup>
-import { computed, onMounted, watch } from 'vue';
+import { computed, watch } from 'vue';
 import { AppState } from '../AppState.js';
 import VaultCard from "@/components/VaultCard.vue";
 import KeepCard from "@/components/KeepCard.vue";
 import EditAccountModal from "@/components/EditAccountModal.vue";
 import Pop from "@/utils/Pop.js";
 import { logger } from "@/utils/Logger.js";
-import { useRoute } from "vue-router";
 import { keepsService } from "@/services/KeepsService.js";
 import { vaultsService } from "@/services/VaultsService.js";
 
 const account = computed(() => AppState.account)
 const keeps = computed(() => AppState.keeps)
 const vaults = computed(() => AppState.vaults)
-const route = useRoute()
 
 
 watch(account, () => {
   if (AppState.account != null) {
-
     getMyVaults()
     getMyKeeps()
   }
