@@ -17,7 +17,12 @@ const route = useRoute()
 
 
 watch(account, () => {
-  getMyVaults()
+  if (AppState.account != null) {
+
+    getMyVaults()
+    getMyKeeps()
+  }
+
 }, { immediate: true })
 
 
@@ -31,6 +36,16 @@ async function getMyVaults() {
   }
 }
 
+async function getMyKeeps() {
+  try {
+    await keepsService.getMyKeeps(account.value.id)
+  }
+  catch (error) {
+    Pop.meow(error);
+    logger.error(error)
+  }
+
+}
 
 </script>
 
