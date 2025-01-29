@@ -55,16 +55,16 @@ async function getKeepsByVaultId() {
             <div :style="{ backgroundImage: `url(${vault.img})` }" class="vault-img">
               <div class="text-center vault-info mb-5">
                 <h1 class="mb-2">{{ vault.name }}</h1>
-                <h4>by {{ vault.creator.name }}</h4>
+                <span class="fs-4">by {{ vault.creator.name }}</span>
               </div>
             </div>
             <div class="text-center mt-4">
-              <span class="rounded px-1 py-1">{{ keptKeeps.length }} Keeps</span>
+              <span class="rounded px-1 py-1 span-keeps fs-2">{{ keptKeeps.length }} Keeps</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-12 mt-5">
         <div class="masonry-container">
           <div v-for="keptKeep in keptKeeps" :key="keptKeep.id" class="mb-3 mx-2">
             <VaultKeepCard :keptKeep="keptKeep" />
@@ -99,15 +99,16 @@ h1 {
   text-shadow: 1px 1.2px rgb(61, 59, 59);
 }
 
-h4 {
+span {
   text-shadow: 1px 1.2px rgb(61, 59, 59);
   color: rgb(238, 233, 233);
 }
 
-span {
+
+.span-keeps {
   background-color: #c3c8db;
-  font-size: 30px;
-  font-weight: 500;
+  // font-size: 30px;
+  // font-weight: 500;
   color: rgb(17, 17, 17)
 }
 
@@ -119,6 +120,12 @@ span {
     display: inline-block;
     width: 100%;
     height: auto;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .masonry-container {
+    columns: 2;
   }
 }
 </style>

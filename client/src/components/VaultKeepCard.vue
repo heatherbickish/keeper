@@ -40,17 +40,16 @@ async function getKeptKeepById(keptKeepId) {
 
 
 <template>
-  <div class="mt-5">
-    <div :style="{ backgroundImage: `url(${keptKeep.img})` }" class="kept-card">
-      <div class="text-end">
-        <button @click="deleteVaultKeep(keptKeep.vaultKeepId)" v-if="keptKeep.creatorId == account?.id" class="btn"
-          type="button" title="Delete from vault"><i class="mdi mdi-close-circle text-danger"></i></button>
-      </div>
-      <div class="kept-info">
-        <h5 @click="getKeptKeepById(keptKeep.id)" class="text-uppercase ms-3" data-bs-toggle="modal"
-          data-bs-target="#vaultKeepModal" role="button">{{
-            keptKeep.name }}</h5>
-      </div>
+  <div class="kept-card">
+    <img :src="keptKeep.img" :alt="'A picture for ' + keptKeep.img" class="picture-img">
+    <div class="delete-button text-end">
+      <button @click="deleteVaultKeep(keptKeep.vaultKeepId)" v-if="keptKeep.creatorId == account?.id" class="btn"
+        type="button" title="Delete from vault"><i class="mdi mdi-close-circle text-danger"></i></button>
+    </div>
+    <div class="kept-info">
+      <h5 @click="getKeptKeepById(keptKeep.id)" class="text-uppercase ms-3" data-bs-toggle="modal"
+        data-bs-target="#vaultKeepModal" role="button">{{
+          keptKeep.name }}</h5>
     </div>
   </div>
   <VaultKeepModal />
@@ -59,13 +58,15 @@ async function getKeptKeepById(keptKeepId) {
 
 <style lang="scss" scoped>
 .kept-card {
-  width: auto;
-  height: 150px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 9px;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2), 5px 6px 4px rgba(0, 0, 0, 0.16);
   position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.picture-img {
+  width: 100%;
+  object-fit: cover;
 }
 
 h5,
@@ -80,5 +81,12 @@ i {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.delete-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
 }
 </style>

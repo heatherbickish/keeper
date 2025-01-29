@@ -122,6 +122,8 @@ async function GetKeepsByProfileId() {
   height: 7rem;
   border-radius: 50%;
   aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center;
   border: 1px solid rgb(100, 97, 97);
   box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2), 5px 6px 4px rgba(0, 0, 0, 0.16);
 }
