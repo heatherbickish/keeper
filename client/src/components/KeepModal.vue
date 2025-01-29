@@ -47,16 +47,18 @@ async function createVaultKeep(keepId) {
                   <img :src="keep.img" :alt="'A picture by ' + keep.creator" class="keep-img">
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 d-flex flex-column justify-space-around">
                 <div class="text-center mt-3">
-                  <i class="mdi mdi-eye fs-5">{{ keep.views }}</i>
-                  <i class="mdi mdi-alpha-k-box-outline fs-5 ms-3"> {{ keep.kept }}</i>
+                  <i class="mdi mdi-eye fs-5" title="View count">{{ keep.views }}</i>
+                  <i class="mdi mdi-alpha-k-box-outline fs-5 ms-3" title="Kept count"> {{ keep.kept }}</i>
                 </div>
-                <div class="text-center mt-md-5">
-                  <h2 id="keepModalLabel">{{ keep.name }}</h2>
-                </div>
-                <div class="text-center mt-md-5 mt-3 p-2">
-                  <p>{{ keep.description }}</p>
+                <div>
+                  <div class="text-center mt-md-5">
+                    <h2 id="keepModalLabel">{{ keep.name }}</h2>
+                  </div>
+                  <div class="text-center mt-md-5 mt-3 p-2">
+                    <p>{{ keep.description }}</p>
+                  </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mt-md-5">
                   <form v-if="account" @submit.prevent="createVaultKeep(keep.id)">

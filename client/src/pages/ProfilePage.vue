@@ -139,6 +139,12 @@ async function GetKeepsByProfileId() {
   }
 }
 
+@media screen and (max-width:768px) {
+  .masonry-container {
+    columns: 2;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .creator-sticky {
     position: relative;
