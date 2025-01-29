@@ -48,4 +48,10 @@ async function getAllKeeps() {
     height: auto;
   }
 }
+
+@media screen and (max-width:768px) {
+  .masonry-container {
+    columns: 2;
+  }
+}
 </style>

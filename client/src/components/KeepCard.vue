@@ -83,6 +83,8 @@ async function deleteKeep(keepId) {
   border-radius: 50%;
   aspect-ratio: 1/1;
   border: 1px solid rgb(100, 97, 97);
+  object-fit: cover;
+  object-position: center;
 }
 
 .keep-info {
