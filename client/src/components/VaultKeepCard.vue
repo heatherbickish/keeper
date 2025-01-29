@@ -47,9 +47,9 @@ async function getKeptKeepById(keptKeepId) {
         type="button" title="Delete from vault"><i class="mdi mdi-close-circle text-danger"></i></button>
     </div>
     <div class="kept-info">
-      <h5 @click="getKeptKeepById(keptKeep.id)" class="text-uppercase ms-3" data-bs-toggle="modal"
+      <span @click="getKeptKeepById(keptKeep.id)" class="text-uppercase ms-3 fs-4" data-bs-toggle="modal"
         data-bs-target="#vaultKeepModal" role="button">{{
-          keptKeep.name }}</h5>
+          keptKeep.name }}</span>
     </div>
   </div>
   <VaultKeepModal />
@@ -69,7 +69,7 @@ async function getKeptKeepById(keptKeepId) {
   object-fit: cover;
 }
 
-h5,
+span,
 i {
   text-shadow: 1px 1px rgb(43, 41, 41);
   font-weight: 400;

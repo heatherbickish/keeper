@@ -55,7 +55,7 @@ async function getKeepsByVaultId() {
             <div :style="{ backgroundImage: `url(${vault.img})` }" class="vault-img">
               <div class="text-center vault-info mb-5">
                 <h1 class="mb-2">{{ vault.name }}</h1>
-                <span class="fs-4">by {{ vault.creator.name }}</span>
+                <span class="span-name">by {{ vault.creator.name }}</span>
               </div>
             </div>
             <div class="text-center mt-4">
@@ -99,15 +99,15 @@ h1 {
   text-shadow: 1px 1.2px rgb(61, 59, 59);
 }
 
-span {
-  text-shadow: 1px 1.2px rgb(61, 59, 59);
+.span-name {
   color: rgb(238, 233, 233);
+  text-shadow: 1px 1.2px rgb(61, 59, 59);
+  font-size: 40px;
 }
 
 
 .span-keeps {
   background-color: #c3c8db;
-  // font-size: 30px;
   // font-weight: 500;
   color: rgb(17, 17, 17)
 }
