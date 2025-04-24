@@ -17,7 +17,6 @@ class VaultsService {
   async createVault(vaultData) {
     const response = await api.post('api/vaults', vaultData)
     const createdVault = new Vault(response.data)
-    // if (vaultData.creatorId != AppState.activeProfile.id) return
     AppState.vaults.unshift(createdVault)
   }
   async getMyVaults() {
